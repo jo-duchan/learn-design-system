@@ -1,5 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
+// git page & action workflow test
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
