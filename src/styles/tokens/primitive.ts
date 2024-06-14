@@ -3,7 +3,7 @@ import { withAlpha } from "@/utile/color-utile";
 /**
  * Primitive Tokens: Success Colors
  */
-const Green = {
+const green = {
   95: "#E6FFE2",
   90: "#D5F7D0",
   80: "#AFEDA7",
@@ -19,7 +19,7 @@ const Green = {
 /**
  * Primitive Tokens: Secondary Colors
  */
-const Blue = {
+const blue = {
   95: "#DEF1FF",
   90: "#CAE3FF",
   80: "#98C8FB",
@@ -35,7 +35,7 @@ const Blue = {
 /**
  * Primitive Tokens: Error Colors
  */
-const Pink = {
+const pink = {
   95: "#FFE3E4",
   90: "#FFD3D4",
   80: "#FFAEAE",
@@ -51,7 +51,7 @@ const Pink = {
 /**
  * Primitive Tokens: Error Colors
  */
-const Red = {
+const red = {
   95: "#FFE5E1",
   90: "#FFD0CA",
   80: "#FFA798",
@@ -67,7 +67,7 @@ const Red = {
 /**
  * Primitive Tokens: Neutral Warm Colors
  */
-const NeutralWarm = {
+const neutralWarm = {
   95: "#F3F1E8",
   90: "#DBD9D1",
   80: "#C3C2BA",
@@ -79,7 +79,7 @@ const NeutralWarm = {
 /**
  * Primitive Tokens: Neutral Cool Colors
  */
-const NeutralCool = {
+const neutralCool = {
   99: "#FAFAFA",
   95: "#EAEAEA",
   90: "#BFBEBE",
@@ -97,7 +97,7 @@ const NeutralCool = {
 /**
  * Primitive Tokens: Primary Colors
  */
-const Orange = {
+const orange = {
   95: "#FFEADE",
   90: "#FFDACA",
   80: "#FFB998",
@@ -113,37 +113,52 @@ const Orange = {
 /**
  * Primitive Tokens: Primary Alpha Colors
  */
-const OrangeAlpha = {
+const orangeAlpha = {
   95: withAlpha("#F05C0C", 0.05),
   85: withAlpha("#F05C0C", 0.15),
   80: withAlpha("#F05C0C", 0.2),
+  70: withAlpha("#F05C0C", 0.3),
+  60: withAlpha("#F05C0C", 0.4),
+  50: withAlpha("#F05C0C", 0.5),
 };
 
 /**
- * Primitive Tokens: Neutral Alpha Colors
+ * Primitive Tokens: Neutral Cool Alpha Colors
  */
-const NeutralAlpha = {
-  20: withAlpha("#444342", 0.2),
-  15: withAlpha("#444342", 0.15),
-  5: withAlpha("#444342", 0.05),
+const neutralCoolAlpha = {
+  95: withAlpha("#444342", 0.05),
+  85: withAlpha("#444342", 0.15),
+  80: withAlpha("#444342", 0.2),
+  40: withAlpha("#444342", 0.6),
 };
 
 /**
- * Primitive Tokens
+ * Primitive Color Tokens
  */
-export const Primitive = {
-  Green,
-  Blue,
-  Pink,
-  Red,
-  NeutralWarm,
-  NeutralCool,
-  Orange,
-  OrangeAlpha,
-  NeutralAlpha,
+export const colors = {
+  green,
+  blue,
+  pink,
+  red,
+  neutralWarm,
+  neutralCool,
+  orange,
+  orangeAlpha,
+  neutralCoolAlpha,
 };
 
-export const Alias = {};
-const ComponentSpecific = {};
-
-export default ComponentSpecific;
+/**
+ * Primitive Multiple Tokens
+ */
+export const multiple = {
+  2: 2,
+  4: 4,
+  8: 8,
+  12: 12,
+  16: 16,
+  20: 20,
+  24: 24,
+  32: 32,
+  40: 40,
+  999: 999,
+};
