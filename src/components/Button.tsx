@@ -1,20 +1,134 @@
-import React from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { button } from "@/styles/tokens/component-specific";
 
-function Base() {
-  return <button></button>;
+export type ButtonStyle = "primary" | "primary-low" | "neutral" | "inverse";
+export type ButtonSize = "large" | "medium";
+export type ButtonStatus = "enabled" | "disabled" | "pressed";
+
+interface Props {
+  style: ButtonStyle;
+  size: ButtonSize;
+  status: ButtonStatus;
+  label: string;
+  action: () => void;
 }
 
-function Primary() {
-  return <Base />;
+interface StyledProps {
+  $width: number;
+  $height: number;
+  $round: number;
+  $labelColor: string;
+  $surfaceColor: string;
 }
 
-function Secondary() {
-  return <Base />;
-}
+function Button({ style, size, status = "enabled", label, action }: Props) {
+  const [btnStatus, SetBtnStatus] = useState<ButtonStatus>(status);
 
-const Button = {
-  Primary,
-  Secondary,
-};
+  const handleClick = () => {
+    action();
+  };
+
+  const handleMouseDown = () => {
+    SetBtnStatus("pressed");
+  };
+
+  const handleMouseUp = () => {
+    SetBtnStatus("enabled");
+  };
+
+  const setColor = () => {
+    let label = "";
+    let surface = "";
+
+    if (style === "primary" && btnStatus === "enabled") {
+      label = button.primaryLabelEnabled;
+      surface = button.primarySurfaceEnabled;
+    }
+
+    if (style === "primary-low" && btnStatus === "enabled") {
+      label = button.primaryLowLabelEnabled;
+      surface = button.primaryLowSurfaceEnabled;
+    }
+
+    if (style === "neutral" && btnStatus === "enabled") {
+      label = button.neutralLabelEnabled;
+      surface = button.neutralSurfaceEnabled;
+    }
+
+    if (style === "inverse" && btnStatus === "enabled") {
+      label = button.inverseLabelEnabled;
+      surface = button.inverseSurfaceEnabled;
+    }
+
+    if (style === "primary" && btnStatus === "pressed") {
+      label = button.primaryLabelPressed;
+      surface = button.primarySurfacePressed;
+    }
+
+    if (style === "primary-low" && btnStatus === "pressed") {
+      label = button.primaryLowLabelPressed;
+      surface = button.primaryLowSurfacePressed;
+    }
+
+    if (btnStatus === "disabled") {
+      label = button.labelDisabled;
+      surface = button.surfaceDisabled;
+    }
+
+    return { label, surface };
+  };
+
+  const setSize = () => {
+    let width = 0;
+    let height = 0;
+    let round = 0;
+
+    if (size === "large") {
+      width = 148;
+      height = 54;
+      round = 4; // 토큰값 연동 필요
+    }
+
+    if (size === "medium") {
+      width = 100;
+      height = 40;
+      round = 4; // 토큰값 연동 필요
+    }
+
+    return { width, height, round };
+  };
+
+  return (
+    <Container
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      $width={setSize().width}
+      $height={setSize().height}
+      $round={setSize().round}
+      $labelColor={setColor().label}
+      $surfaceColor={setColor().surface}
+      disabled={status === "disabled"}
+    >
+      {label}
+    </Container>
+  );
+}
 
 export default Button;
+
+const Container = styled.button<StyledProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${({ $width }) => `${$width}px`};
+  height: ${({ $height }) => `${$height}px`};
+  border: initial;
+  border-radius: ${({ $round }) => `${$round}px`};
+  color: ${({ $labelColor }) => $labelColor};
+  background-color: ${({ $surfaceColor }) => $surfaceColor};
+
+  transition: 200ms ease-in-out;
+  transition-property: color, background-color;
+`;

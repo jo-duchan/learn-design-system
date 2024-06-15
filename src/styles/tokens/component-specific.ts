@@ -22,8 +22,8 @@ export const button = {
   inverseLabelEnabled: "",
   inverseSurfacePressed: "",
   inverseLabelPressed: "",
-  surfaceDisabled: "",
-  labelDisabled: "",
+  surfaceDisabled: surface[30],
+  labelDisabled: text[30],
 };
 
 export const divider = line[40];
