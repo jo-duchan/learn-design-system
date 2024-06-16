@@ -131,6 +131,7 @@ const Container = styled.button<StyledProps>`
   width: ${({ $width }) => `${$width}px`};
   height: ${({ $height }) => `${$height}px`};
   border: initial;
+  padding: initial;
   border-radius: ${({ $round }) => `${$round}px`};
   color: ${({ $labelColor }) => $labelColor};
   background-color: ${({ $surfaceColor }) => $surfaceColor};
