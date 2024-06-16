@@ -1,4 +1,4 @@
-import { surface, text, line } from "@/styles/tokens/alias";
+import { surface, text, line, round } from "@/styles/tokens/alias";
 
 /**
  * Component Specific Button Tokens
@@ -22,6 +22,8 @@ export const button = {
   inverseLabelPressed: "",
   surfaceDisabled: surface[30],
   labelDisabled: text[30],
+  largeRound: round.xs,
+  mediumRound: round.xs,
 };
 
 export const divider = {

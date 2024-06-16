@@ -1,6 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { type FlattenSimpleInterpolation } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
+import textStyles from "@/styles/typography";
 
 export type ButtonStyle = "primary" | "primary-low" | "neutral" | "inverse";
 export type ButtonSize = "large" | "medium";
@@ -18,6 +19,7 @@ interface StyledProps {
   $width: number;
   $height: number;
   $round: number;
+  $font: FlattenSimpleInterpolation;
   $labelColor: string;
   $surfaceColor: string;
 }
@@ -83,20 +85,23 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
     let width = 0;
     let height = 0;
     let round = 0;
+    let font = [] as FlattenSimpleInterpolation;
 
     if (size === "large") {
       width = 148;
       height = 54;
-      round = 4; // 토큰값 연동 필요
+      round = button.largeRound;
+      font = textStyles.title2.bold;
     }
 
     if (size === "medium") {
       width = 100;
       height = 40;
-      round = 4; // 토큰값 연동 필요
+      round = button.mediumRound;
+      font = textStyles.body1.semiBold;
     }
 
-    return { width, height, round };
+    return { width, height, round, font };
   };
 
   return (
@@ -107,6 +112,7 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
       $width={setSize().width}
       $height={setSize().height}
       $round={setSize().round}
+      $font={setSize().font}
       $labelColor={setColor().label}
       $surfaceColor={setColor().surface}
       disabled={status === "disabled"}
@@ -128,7 +134,10 @@ const Container = styled.button<StyledProps>`
   border-radius: ${({ $round }) => `${$round}px`};
   color: ${({ $labelColor }) => $labelColor};
   background-color: ${({ $surfaceColor }) => $surfaceColor};
+  ${({ $font }) => $font};
 
   transition: 200ms ease-in-out;
   transition-property: color, background-color;
+  cursor: pointer;
+  user-select: none;
 `;
