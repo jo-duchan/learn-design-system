@@ -1,10 +1,8 @@
 import { surface, text, line } from "@/styles/tokens/alias";
 
-// const primary = {};
-// const primaryLow = {};
-// const neutral = {};
-// const inverse = {};
-
+/**
+ * Component Specific Button Tokens
+ */
 export const button = {
   primarySurfaceEnabled: surface.primary10,
   primaryLabelEnabled: text[10],
@@ -26,6 +24,9 @@ export const button = {
   labelDisabled: text[30],
 };
 
-export const divider = line[40];
+export const divider = {
+  1: line[30],
+  2: line[40],
+};
 
 export const infoText = text[40];
