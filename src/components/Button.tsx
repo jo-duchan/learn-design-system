@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled, { type FlattenSimpleInterpolation } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
 import textStyles from "@/styles/typography";
@@ -27,15 +27,23 @@ interface StyledProps {
 function Button({ style, size, status = "enabled", label, action }: Props) {
   const [btnStatus, SetBtnStatus] = useState<ButtonStatus>(status);
 
+  useEffect(() => {
+    SetBtnStatus(status);
+  }, [status]);
+
   const handleClick = () => {
     action();
+    console.log("click");
   };
 
   const handleSetStatusPressed = () => {
     SetBtnStatus("pressed");
   };
 
-  const handleSetStatusEnabled = () => {
+  const handleSetStatusEnabled = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (e.currentTarget.disabled) return;
     SetBtnStatus("enabled");
   };
 
@@ -152,4 +160,8 @@ const Container = styled.button<StyledProps>`
   transition-property: color, background-color;
   cursor: pointer;
   user-select: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
