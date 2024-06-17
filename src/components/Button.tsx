@@ -73,6 +73,16 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
       surface = button.primaryLowSurfacePressed;
     }
 
+    if (style === "neutral" && btnStatus === "pressed") {
+      label = button.neutralLabelPressed;
+      surface = button.neutralSurfacePressed;
+    }
+
+    if (style === "inverse" && btnStatus === "pressed") {
+      label = button.inverseLabelPressed;
+      surface = button.inverseSurfacePressed;
+    }
+
     if (btnStatus === "disabled") {
       label = button.labelDisabled;
       surface = button.surfaceDisabled;
