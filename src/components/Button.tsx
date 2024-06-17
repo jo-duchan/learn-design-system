@@ -31,11 +31,11 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
     action();
   };
 
-  const handleMouseDown = () => {
+  const handleSetStatusPressed = () => {
     SetBtnStatus("pressed");
   };
 
-  const handleMouseUp = () => {
+  const handleSetStatusEnabled = () => {
     SetBtnStatus("enabled");
   };
 
@@ -107,8 +107,9 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
   return (
     <Container
       onClick={handleClick}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      onMouseDown={handleSetStatusPressed}
+      onMouseUp={handleSetStatusEnabled}
+      onMouseLeave={handleSetStatusEnabled}
       $width={setSize().width}
       $height={setSize().height}
       $round={setSize().round}
