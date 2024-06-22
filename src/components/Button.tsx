@@ -25,10 +25,10 @@ interface StyledProps {
 }
 
 function Button({ style, size, status = "enabled", label, action }: Props) {
-  const [btnStatus, SetBtnStatus] = useState<ButtonStatus>(status);
+  const [btnStatus, setBtnStatus] = useState<ButtonStatus>(status);
 
   useEffect(() => {
-    SetBtnStatus(status);
+    setBtnStatus(status);
   }, [status]);
 
   const handleClick = () => {
@@ -37,14 +37,14 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
   };
 
   const handleSetStatusPressed = () => {
-    SetBtnStatus("pressed");
+    setBtnStatus("pressed");
   };
 
   const handleSetStatusEnabled = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (e.currentTarget.disabled) return;
-    SetBtnStatus("enabled");
+    setBtnStatus("enabled");
   };
 
   const setColor = () => {
