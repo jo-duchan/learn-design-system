@@ -50,6 +50,7 @@ const UserProfile = styled.div`
   & > img {
     display: block;
     width: 100%;
+    height: 100%;
   }
 `;
 
@@ -65,6 +66,7 @@ const UserBadge = styled.div`
   & > img {
     display: block;
     width: 100%;
+    height: 100%;
   }
 `;
 
