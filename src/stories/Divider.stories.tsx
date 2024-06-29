@@ -14,14 +14,14 @@ export const Default: Story = {
   },
 };
 
-export const Variant2: Story = {
+export const Strong: Story = {
   args: {
-    style: "variant2",
+    style: "strong",
   },
 };
 
-export const Variant3: Story = {
+export const Navigation: Story = {
   args: {
-    style: "variant3",
+    style: "navigation",
   },
 };

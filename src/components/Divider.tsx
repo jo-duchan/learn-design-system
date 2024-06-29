@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { divider } from "@/styles/tokens/component-specific";
 
-export type DividerStyle = "default" | "variant2" | "variant3";
+export type DividerStyle = "default" | "strong" | "navigation";
 
 interface Props {
   width?: number;
@@ -19,12 +19,12 @@ function Divider({ width = 328, style = "default" }: Props) {
     let height: number = 1;
     let surfaceColor: string = divider[2];
 
-    if (style === "variant2") {
+    if (style === "strong") {
       height = 12;
       surfaceColor = divider[2];
     }
 
-    if (style === "variant3") {
+    if (style === "navigation") {
       height = 1;
       surfaceColor = divider[1];
     }
