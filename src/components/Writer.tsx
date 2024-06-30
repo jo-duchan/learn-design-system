@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { text, surface } from "@/styles/tokens/alias";
+import { text } from "@/styles/tokens/alias";
 import textStyles from "@/styles/typography";
 import Level2Badge from "@/assets/img/user-level-2.png";
 import AdminBadge from "@/assets/img/user-level-admin.png";
@@ -40,7 +40,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  background-color: ${surface[10]};
 `;
 
 const UserProfile = styled.div`

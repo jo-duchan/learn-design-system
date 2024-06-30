@@ -20,6 +20,8 @@ export const button = {
   inverseLabelEnabled: text[50],
   inverseSurfacePressed: surface.inverse20,
   inverseLabelPressed: text[50],
+  neutralLowSurfaceEnabled: surface.neutralLow10,
+  neutralLowSurfacePressed: surface.neutralLow20,
   surfaceDisabled: surface.disabled10,
   labelDisabled: text.disabled,
   largeRound: round.xs,
