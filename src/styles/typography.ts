@@ -1,12 +1,12 @@
 import { css } from "styled-components";
 
 const headline1 = {
-  bold: css`
+  bold32: css`
     font-size: 32px;
     font-weight: 700;
     line-height: 130%;
   `,
-  regular: css`
+  regular32: css`
     font-size: 32px;
     font-weight: 500;
     line-height: 130%;
@@ -14,12 +14,12 @@ const headline1 = {
 };
 
 const headline2 = {
-  bold: css`
+  bold28: css`
     font-size: 28px;
     font-weight: 700;
     line-height: 130%;
   `,
-  regular: css`
+  regular28: css`
     font-size: 28px;
     font-weight: 500;
     line-height: 130%;
@@ -27,12 +27,12 @@ const headline2 = {
 };
 
 const title1 = {
-  bold: css`
+  bold20: css`
     font-size: 20px;
     font-weight: 700;
     line-height: 150%;
   `,
-  semiBold: css`
+  semiBold20: css`
     font-size: 20px;
     font-weight: 600;
     line-height: 150%;
@@ -40,12 +40,12 @@ const title1 = {
 };
 
 const title2 = {
-  bold: css`
+  bold18: css`
     font-size: 18px;
     font-weight: 700;
     line-height: 150%;
   `,
-  semiBold: css`
+  semiBold18: css`
     font-size: 18px;
     font-weight: 600;
     line-height: 150%;
@@ -53,7 +53,7 @@ const title2 = {
 };
 
 const title3 = {
-  regular: css`
+  regular14: css`
     font-size: 14px;
     font-weight: 500;
     line-height: 150%;
@@ -61,17 +61,17 @@ const title3 = {
 };
 
 const body1 = {
-  bold: css`
+  bold16: css`
     font-size: 16px;
     font-weight: 700;
     line-height: 150%;
   `,
-  semiBold: css`
+  semiBold16: css`
     font-size: 16px;
     font-weight: 600;
     line-height: 150%;
   `,
-  regular: css`
+  regular16: css`
     font-size: 16px;
     font-weight: 500;
     line-height: 150%;
@@ -79,17 +79,17 @@ const body1 = {
 };
 
 const body2 = {
-  bold: css`
+  bold14: css`
     font-size: 14px;
     font-weight: 700;
     line-height: 150%;
   `,
-  semiBold: css`
+  semiBold14: css`
     font-size: 14px;
     font-weight: 600;
     line-height: 150%;
   `,
-  regular: css`
+  regular14: css`
     font-size: 14px;
     font-weight: 500;
     line-height: 150%;
@@ -97,7 +97,7 @@ const body2 = {
 };
 
 const caption = {
-  regular: css`
+  regular12: css`
     font-size: 12px;
     font-weight: 500;
     line-height: 125%;

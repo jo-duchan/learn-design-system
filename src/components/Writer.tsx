@@ -54,7 +54,7 @@ const UserProfile = styled.div`
 `;
 
 const UserName = styled.span`
-  ${textStyles.caption.regular};
+  ${textStyles.caption.regular12};
   color: ${text[10]};
 `;
 
@@ -70,6 +70,6 @@ const UserBadge = styled.div`
 `;
 
 const UserLoginId = styled.span`
-  ${textStyles.caption.regular};
+  ${textStyles.caption.regular12};
   color: ${text[20]};
 `;

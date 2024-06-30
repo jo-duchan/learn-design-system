@@ -109,14 +109,14 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
       width = 148;
       height = 54;
       round = button.largeRound;
-      font = textStyles.title2.bold;
+      font = textStyles.title2.bold18;
     }
 
     if (size === "medium") {
       width = 100;
       height = 40;
       round = button.mediumRound;
-      font = textStyles.body1.semiBold;
+      font = textStyles.body1.semiBold16;
     }
 
     return { width, height, round, font };
