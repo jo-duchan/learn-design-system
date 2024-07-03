@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Writer from "@/components/Writer";
 
 const unknown1 =
-  "https://mock-design-system.s3.us-east-2.amazonaws.com/user-unknown-1.png";
+  "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com//user-unknown-1.png";
 const admin =
-  "https://mock-design-system.s3.us-east-2.amazonaws.com/user-admin.png";
+  "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com/user-admin.png";
 const newneek =
-  "https://mock-design-system.s3.us-east-2.amazonaws.com/user-newneek.png";
+  "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com//user-newneek.png";
 
 const meta: Meta<typeof Writer> = {
   component: Writer,
