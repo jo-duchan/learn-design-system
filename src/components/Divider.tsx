@@ -4,37 +4,43 @@ import { divider } from "@/styles/tokens/component-specific";
 export type DividerStyle = "default" | "strong" | "navigation";
 
 interface Props {
+  fullWidth: boolean;
   width?: number;
   style: DividerStyle;
 }
 
 interface StyledProps {
-  $width: number;
-  $height: number;
+  $width: string;
+  $height: string;
   $surfaceColor: string;
 }
 
-function Divider({ width = 328, style = "default" }: Props) {
+function Divider({ fullWidth = false, width = 328, style = "default" }: Props) {
   const setStyle = () => {
-    let height: number = 1;
+    let dividerWidth = `${width}px`;
+    let height: string = "1px";
     let surfaceColor: string = divider[2];
 
+    if (fullWidth) {
+      dividerWidth = "100%";
+    }
+
     if (style === "strong") {
-      height = 12;
+      height = "12px";
       surfaceColor = divider[2];
     }
 
     if (style === "navigation") {
-      height = 1;
+      height = "1px";
       surfaceColor = divider[1];
     }
 
-    return { height, surfaceColor };
+    return { dividerWidth, height, surfaceColor };
   };
 
   return (
     <Container
-      $width={width}
+      $width={setStyle().dividerWidth}
       $height={setStyle().height}
       $surfaceColor={setStyle().surfaceColor}
     />
@@ -44,7 +50,7 @@ function Divider({ width = 328, style = "default" }: Props) {
 export default Divider;
 
 const Container = styled.div<StyledProps>`
-  width: ${({ $width }) => `${$width}px`};
-  height: ${({ $height }) => `${$height}px`};
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
   background-color: ${({ $surfaceColor }) => $surfaceColor};
 `;

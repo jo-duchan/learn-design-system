@@ -11,17 +11,23 @@ type Story = StoryObj<typeof Divider>;
 export const Default: Story = {
   args: {
     style: "default",
+    width: 328,
+    fullWidth: false,
   },
 };
 
 export const Strong: Story = {
   args: {
     style: "strong",
+    width: 328,
+    fullWidth: false,
   },
 };
 
 export const Navigation: Story = {
   args: {
     style: "navigation",
+    width: 328,
+    fullWidth: false,
   },
 };
