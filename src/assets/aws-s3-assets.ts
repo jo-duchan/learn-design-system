@@ -6,3 +6,8 @@ export const profile = {
   newneek:
     "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com/user-newneek.png",
 };
+
+export const demo = {
+  screen1:
+    "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com/demo-screen.png",
+};
