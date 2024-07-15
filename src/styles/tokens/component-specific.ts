@@ -34,3 +34,8 @@ export const divider = {
 };
 
 export const infoText = text[40];
+
+export const chip = {
+  largeRound: round.s,
+  smallRound: round.full,
+};
