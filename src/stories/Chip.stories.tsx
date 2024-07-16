@@ -3,6 +3,7 @@ import { useArgs } from "@storybook/preview-api";
 import Chip from "@/components/Chip";
 
 const meta: Meta<typeof Chip> = {
+  title: "Components/ChipSeries",
   component: Chip,
 };
 

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import NavigationBar from "@/components/NavigationBar";
 
 const meta: Meta<typeof NavigationBar> = {
+  title: "Components/NavigationBar",
   component: NavigationBar,
 };
 

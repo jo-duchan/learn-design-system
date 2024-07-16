@@ -17,6 +17,7 @@ const Container = styled.div`
 `;
 
 const meta: Meta<typeof Dim> = {
+  title: "Components/Dim",
   component: Dim,
   decorators: [
     (Story) => (
