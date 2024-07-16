@@ -8,7 +8,7 @@ const headline1 = {
   `,
   regular32: css`
     font-size: 32px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 130%;
   `,
 };
@@ -21,7 +21,7 @@ const headline2 = {
   `,
   regular28: css`
     font-size: 28px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 130%;
   `,
 };
@@ -55,7 +55,7 @@ const title2 = {
 const title3 = {
   regular14: css`
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 150%;
   `,
 };
@@ -73,7 +73,7 @@ const body1 = {
   `,
   regular16: css`
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 150%;
   `,
 };
@@ -91,7 +91,7 @@ const body2 = {
   `,
   regular14: css`
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 150%;
   `,
 };
@@ -99,7 +99,7 @@ const body2 = {
 const caption = {
   regular12: css`
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 125%;
   `,
 };
