@@ -3,16 +3,23 @@ import styled, { type FlattenSimpleInterpolation } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
 import textStyles from "@/styles/typography";
 
-export type ButtonStyle = "primary" | "primary-low" | "neutral" | "inverse";
 export type ButtonSize = "large" | "medium";
 export type ButtonStatus = "enabled" | "disabled" | "pressed";
 
 interface Props {
-  style: ButtonStyle;
   size: ButtonSize;
   status: ButtonStatus;
   label: string;
   action: () => void;
+}
+
+interface BaseProps extends Props {
+  labelEnabledColor: string;
+  surfaceEnabledColor: string;
+  labelPressedColor: string;
+  surfacePressedColor: string;
+  labelDisabledColor: string;
+  surfaceDisabledColor: string;
 }
 
 interface StyledProps {
@@ -24,17 +31,23 @@ interface StyledProps {
   $surfaceColor: string;
 }
 
-function Button({ style, size, status = "enabled", label, action }: Props) {
+function ButtonBase({
+  size,
+  status,
+  label,
+  action,
+  labelEnabledColor,
+  surfaceEnabledColor,
+  labelPressedColor,
+  surfacePressedColor,
+  labelDisabledColor,
+  surfaceDisabledColor,
+}: BaseProps) {
   const [btnStatus, setBtnStatus] = useState<ButtonStatus>(status);
 
   useEffect(() => {
     setBtnStatus(status);
   }, [status]);
-
-  const handleClick = () => {
-    action();
-    console.log("click");
-  };
 
   const handleSetStatusPressed = () => {
     setBtnStatus("pressed");
@@ -48,62 +61,32 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
   };
 
   const setColor = () => {
-    let label = "";
-    let surface = "";
+    let label = labelEnabledColor;
+    let surface = surfaceEnabledColor;
 
-    if (style === "primary" && btnStatus === "enabled") {
-      label = button.primaryLabelEnabled;
-      surface = button.primarySurfaceEnabled;
+    if (btnStatus === "enabled") {
+      label = labelEnabledColor;
+      surface = surfaceEnabledColor;
     }
 
-    if (style === "primary-low" && btnStatus === "enabled") {
-      label = button.primaryLowLabelEnabled;
-      surface = button.primaryLowSurfaceEnabled;
-    }
-
-    if (style === "neutral" && btnStatus === "enabled") {
-      label = button.neutralLabelEnabled;
-      surface = button.neutralSurfaceEnabled;
-    }
-
-    if (style === "inverse" && btnStatus === "enabled") {
-      label = button.inverseLabelEnabled;
-      surface = button.inverseSurfaceEnabled;
-    }
-
-    if (style === "primary" && btnStatus === "pressed") {
-      label = button.primaryLabelPressed;
-      surface = button.primarySurfacePressed;
-    }
-
-    if (style === "primary-low" && btnStatus === "pressed") {
-      label = button.primaryLowLabelPressed;
-      surface = button.primaryLowSurfacePressed;
-    }
-
-    if (style === "neutral" && btnStatus === "pressed") {
-      label = button.neutralLabelPressed;
-      surface = button.neutralSurfacePressed;
-    }
-
-    if (style === "inverse" && btnStatus === "pressed") {
-      label = button.inverseLabelPressed;
-      surface = button.inverseSurfacePressed;
+    if (btnStatus === "pressed") {
+      label = labelPressedColor;
+      surface = surfacePressedColor;
     }
 
     if (btnStatus === "disabled") {
-      label = button.labelDisabled;
-      surface = button.surfaceDisabled;
+      label = labelDisabledColor;
+      surface = surfaceDisabledColor;
     }
 
     return { label, surface };
   };
 
   const setSize = () => {
-    let width = 0;
-    let height = 0;
-    let round = 0;
-    let font = [] as FlattenSimpleInterpolation;
+    let width = 100;
+    let height = 40;
+    let round = button.mediumRound;
+    let font = textStyles.body1.semiBold16;
 
     if (size === "large") {
       width = 148;
@@ -124,7 +107,7 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
 
   return (
     <Container
-      onClick={handleClick}
+      onClick={action}
       onMouseDown={handleSetStatusPressed}
       onMouseUp={handleSetStatusEnabled}
       onMouseLeave={handleSetStatusEnabled}
@@ -140,6 +123,81 @@ function Button({ style, size, status = "enabled", label, action }: Props) {
     </Container>
   );
 }
+
+function Primary({ size, status, label, action }: Props) {
+  return (
+    <ButtonBase
+      size={size}
+      status={status}
+      label={label}
+      action={action}
+      labelEnabledColor={button.primaryLabelEnabled}
+      surfaceEnabledColor={button.primarySurfaceEnabled}
+      labelPressedColor={button.primaryLabelPressed}
+      surfacePressedColor={button.primarySurfacePressed}
+      labelDisabledColor={button.labelDisabled}
+      surfaceDisabledColor={button.surfaceDisabled}
+    />
+  );
+}
+
+function PrimaryLow({ size, status, label, action }: Props) {
+  return (
+    <ButtonBase
+      size={size}
+      status={status}
+      label={label}
+      action={action}
+      labelEnabledColor={button.primaryLowLabelEnabled}
+      surfaceEnabledColor={button.primaryLowSurfaceEnabled}
+      labelPressedColor={button.primaryLowLabelPressed}
+      surfacePressedColor={button.primaryLowSurfacePressed}
+      labelDisabledColor={button.labelDisabled}
+      surfaceDisabledColor={button.surfaceDisabled}
+    />
+  );
+}
+
+function Neutral({ size, status, label, action }: Props) {
+  return (
+    <ButtonBase
+      size={size}
+      status={status}
+      label={label}
+      action={action}
+      labelEnabledColor={button.neutralLabelEnabled}
+      surfaceEnabledColor={button.neutralSurfaceEnabled}
+      labelPressedColor={button.neutralLabelPressed}
+      surfacePressedColor={button.neutralSurfacePressed}
+      labelDisabledColor={button.labelDisabled}
+      surfaceDisabledColor={button.surfaceDisabled}
+    />
+  );
+}
+
+function Inverse({ size, status, label, action }: Props) {
+  return (
+    <ButtonBase
+      size={size}
+      status={status}
+      label={label}
+      action={action}
+      labelEnabledColor={button.inverseLabelEnabled}
+      surfaceEnabledColor={button.inverseSurfaceEnabled}
+      labelPressedColor={button.inverseLabelPressed}
+      surfacePressedColor={button.inverseSurfacePressed}
+      labelDisabledColor={button.labelDisabled}
+      surfaceDisabledColor={button.surfaceDisabled}
+    />
+  );
+}
+
+const Button = {
+  Primary,
+  PrimaryLow,
+  Neutral,
+  Inverse,
+};
 
 export default Button;
 

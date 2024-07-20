@@ -20,11 +20,11 @@ interface BaseProps extends Props {
 }
 
 interface StyledProps {
-  $color: string;
-  $bgColor: string;
   $width: number;
   $height: number;
   $font: FlattenSimpleInterpolation;
+  $labelColor: string;
+  $surfaceColor: string;
 }
 
 function ButtonBase({
@@ -38,20 +38,20 @@ function ButtonBase({
   surfaceDisabledColor,
 }: BaseProps) {
   const setColor = () => {
-    let color = labelEnabledColor;
-    let bgColor = surfaceEnabledColor;
+    let label = labelEnabledColor;
+    let surface = surfaceEnabledColor;
 
     if (status === "enabled") {
-      color = labelEnabledColor;
-      bgColor = surfaceEnabledColor;
+      label = labelEnabledColor;
+      surface = surfaceEnabledColor;
     }
 
     if (status === "disabled") {
-      color = labelDisabledColor;
-      bgColor = surfaceDisabledColor;
+      label = labelDisabledColor;
+      surface = surfaceDisabledColor;
     }
 
-    return { color, bgColor };
+    return { label, surface };
   };
 
   const setSize = () => {
@@ -78,8 +78,8 @@ function ButtonBase({
     <Container
       onClick={action}
       disabled={status === "disabled"}
-      $color={setColor().color}
-      $bgColor={setColor().bgColor}
+      $labelColor={setColor().label}
+      $surfaceColor={setColor().surface}
       $font={setSize().font}
       $width={setSize().width}
       $height={setSize().height}
@@ -134,8 +134,8 @@ const Container = styled.button<StyledProps>`
   height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
-  color: ${({ $color }) => $color};
-  background-color: ${({ $bgColor }) => $bgColor};
+  color: ${({ $labelColor }) => $labelColor};
+  background-color: ${({ $surfaceColor }) => $surfaceColor};
   ${({ $font }) => $font};
 
   transition: 200ms ease-in-out;
