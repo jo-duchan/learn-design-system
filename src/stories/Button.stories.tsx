@@ -11,7 +11,7 @@ const meta: Meta<MetaType> = {
   title: "Components/Button",
   argTypes: {
     size: {
-      options: ["large", "medium"],
+      options: ["large", "medium", "small"],
       control: { type: "radio" },
     },
     status: {

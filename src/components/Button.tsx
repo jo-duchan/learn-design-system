@@ -3,7 +3,7 @@ import styled, { type FlattenSimpleInterpolation } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
 import textStyles from "@/styles/typography";
 
-export type ButtonSize = "large" | "medium";
+export type ButtonSize = "large" | "medium" | "small";
 export type ButtonStatus = "enabled" | "disabled" | "pressed";
 
 interface Props {
@@ -100,6 +100,13 @@ function ButtonBase({
       height = 40;
       round = button.mediumRound;
       font = textStyles.body1.semiBold16;
+    }
+
+    if (size === "small") {
+      width = 60;
+      height = 32;
+      round = button.mediumRound;
+      font = textStyles.body2.semiBold14;
     }
 
     return { width, height, round, font };
