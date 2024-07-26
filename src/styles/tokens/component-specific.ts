@@ -1,4 +1,4 @@
-import { surface, text, line, round } from "@/styles/tokens/alias";
+import { surface, text, line, round, icon } from "@/styles/tokens/alias";
 
 /**
  * Component Specific Button Tokens
@@ -24,8 +24,21 @@ export const button = {
   neutralLowSurfacePressed: surface.neutralLow20,
   surfaceDisabled: surface.disabled10,
   labelDisabled: text.disabled,
+  iconPrimarySurfaceEnabled: surface.primaryLow10,
+  iconPrimaryIconEnabled: icon.accent,
+  iconPrimarySurfacePressed: surface.primaryLow20,
+  iconPrimaryIconPressed: icon.accent,
+  iconPrimarySurfaceDisabled: surface.disabled10,
+  iconPrimaryIconDisabled: icon[30],
+  iconGhostIconEnabled: icon[10],
+  iconGhostSurfacePressed: surface.neutralLow20,
+  iconGhostIconPressed: icon[10],
+  iconGhostSurfaceDisabled: surface.disabled10,
+  iconGhostIconDisabled: icon[30],
+
   largeRound: round.xs,
   mediumRound: round.xs,
+  iconRound: round.full,
 };
 
 export const divider = {
