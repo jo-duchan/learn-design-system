@@ -21,7 +21,7 @@ const text = {
 const icon = {
   10: colors.neutralCool[99],
   20: colors.neutralCool[90],
-  30: colors.neutralCool[60],
+  30: colors.neutralCool[70],
   accent: colors.orange[50],
   userLevel1: colors.orange[50],
   userLevel2: colors.blue[50],
@@ -36,7 +36,7 @@ const line = {
   20: colors.neutralCool[90],
   30: colors.neutralCool[60],
   40: colors.neutralCool[40],
-  accect: colors.orange[50],
+  accent: colors.orange[50],
   userLevel1: colors.orange[50],
   userLevel2: colors.blue[50],
   userLevelAdmin: colors.orange[50],
