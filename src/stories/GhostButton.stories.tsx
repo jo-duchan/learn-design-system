@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import GhostButton from "@/components/GhostButton";
 
-const meta: Meta<typeof GhostButton.Primary | typeof GhostButton.Neutral> = {
+type GhostButton = typeof GhostButton.Primary | typeof GhostButton.Neutral;
+
+const meta: Meta<GhostButton> = {
   title: "Components/GhostButton",
   argTypes: {
     size: {
@@ -16,7 +18,7 @@ const meta: Meta<typeof GhostButton.Primary | typeof GhostButton.Neutral> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof GhostButton.Primary | typeof GhostButton.Neutral>;
+type Story = StoryObj<GhostButton>;
 
 export const Primary: Story = {
   args: {

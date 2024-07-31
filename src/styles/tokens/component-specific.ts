@@ -52,3 +52,5 @@ export const chip = {
   largeRound: round.s,
   smallRound: round.full,
 };
+
+export const alertRound = round.xs;
