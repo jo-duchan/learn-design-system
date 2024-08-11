@@ -63,8 +63,11 @@ const Container = styled.div<StyledProps>`
 `;
 
 const Item = styled.span<StyledProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: ${({ $length }) => `calc(100% / ${$length})`};
-  text-align: center;
+  height: 100%;
   ${textStyles.body1.semiBold16};
   color: ${({ $selected }) => ($selected ? text[10] : text[40])};
   cursor: pointer;
