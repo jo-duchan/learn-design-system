@@ -3,6 +3,7 @@ import styled from "styled-components";
 import type { Meta, StoryObj } from "@storybook/react";
 import Progress from "@/components/Progress";
 import { surface } from "@/styles/tokens/alias";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 const ScrollContainer = styled.div`
   width: 360px;
@@ -20,26 +21,10 @@ const meta: Meta<typeof Progress> = {
   title: "Components/Progress",
   component: Progress,
   argTypes: {
-    present: {
-      table: {
-        disable: true,
-      },
-    },
-    width: {
-      table: {
-        disable: true,
-      },
-    },
-    top: {
-      table: {
-        disable: true,
-      },
-    },
-    left: {
-      table: {
-        disable: true,
-      },
-    },
+    ...disableProperty("present"),
+    ...disableProperty("width"),
+    ...disableProperty("top"),
+    ...disableProperty("left"),
   },
 };
 

@@ -3,31 +3,16 @@ import SnackBar from "@/components/SnackBar";
 import GhostButton from "@/components/GhostButton";
 import IconButton from "@/components/IconButton";
 import Icons from "@/styles/iconography";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 const meta: Meta<typeof SnackBar> = {
   title: "Components/SnackBar",
   component: SnackBar,
   argTypes: {
-    button: {
-      table: {
-        disable: true,
-      },
-    },
-    fixedPosition: {
-      table: {
-        disable: true,
-      },
-    },
-    fullWidth: {
-      table: {
-        disable: true,
-      },
-    },
-    width: {
-      table: {
-        disable: true,
-      },
-    },
+    ...disableProperty("button"),
+    ...disableProperty("fixedPosition"),
+    ...disableProperty("fullWidth"),
+    ...disableProperty("width"),
   },
 };
 

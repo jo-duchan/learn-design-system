@@ -1,4 +1,4 @@
-import { withAlpha } from "@/utile/color-utile";
+import { withAlpha } from "@/utils/color-util";
 
 /**
  * Primitive Tokens: Success Colors

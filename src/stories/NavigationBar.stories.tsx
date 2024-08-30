@@ -1,25 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import NavigationBar from "@/components/NavigationBar";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 const meta: Meta<typeof NavigationBar> = {
   title: "Components/NavigationBar",
   component: NavigationBar,
   argTypes: {
-    fixedPosition: {
-      table: {
-        disable: true,
-      },
-    },
-    fullWidth: {
-      table: {
-        disable: true,
-      },
-    },
-    width: {
-      table: {
-        disable: true,
-      },
-    },
+    ...disableProperty("fixedPosition"),
+    ...disableProperty("fullWidth"),
+    ...disableProperty("width"),
   },
 };
 
