@@ -95,7 +95,7 @@ const Container = styled.div<StyledProps>`
   padding: 8px 16px;
   box-sizing: border-box;
   background-color: ${surface[20]};
-  border-radius: ${`${alertRound}px`};
+  border-radius: ${alertRound};
 
   ${Transition};
 `;

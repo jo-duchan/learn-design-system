@@ -28,7 +28,7 @@ export const Outline: Story = {
     const { register, setValue, handleSubmit } = useForm<FieldValues>();
 
     const handleAlertText: SubmitHandler<FieldValues> = (data) => {
-      globalThis.alert(`입력 텍스트는: ${data.liveDemo}`);
+      globalThis.alert(`입력한 텍스트는: ${data.liveDemo}`);
     };
     return (
       <>

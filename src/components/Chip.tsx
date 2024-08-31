@@ -51,7 +51,7 @@ const Container = styled.div<StyledProps>`
   width: fit-content;
   height: fit-content;
   padding: 8px 16px;
-  border-radius: ${`${chip.largeRound}px`};
+  border-radius: ${chip.largeRound};
   ${textStyles.body2.semiBold14};
   color: ${({ $color }) => $color};
   background-color: ${({ $bgColor }) => $bgColor};

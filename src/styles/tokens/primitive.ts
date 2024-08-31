@@ -155,14 +155,14 @@ export const colors = {
  * Primitive Multiple Tokens
  */
 export const multiple = {
-  2: 2,
-  4: 4,
-  8: 8,
-  12: 12,
-  16: 16,
-  20: 20,
-  24: 24,
-  32: 32,
-  40: 40,
-  999: 999,
+  2: "2px",
+  4: "4px",
+  8: "8px",
+  12: "12px",
+  16: "16px",
+  20: "20px",
+  24: "24px",
+  32: "32px",
+  40: "40px",
+  999: "999px",
 };

@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
     html body * {
         font-family: ${fontFamily};
+        box-sizing: border-box;
     }
     
 `;

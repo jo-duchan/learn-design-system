@@ -65,7 +65,7 @@ function TextfieldOutline({
   };
   return (
     <Container $status={textfieldStatus} $width={setWidth()}>
-      <InputWrapper>
+      <InputWrapper $status={textfieldStatus}>
         <Label $status={textfieldStatus}>{label}</Label>
         <input
           type="text"
@@ -111,7 +111,7 @@ const Container = styled.div<StyledProps>`
   }}
 `;
 
-const InputWrapper = styled.label`
+const InputWrapper = styled.label<StyledProps>`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -126,7 +126,23 @@ const InputWrapper = styled.label`
     height: 24px;
     margin-bottom: 8px;
     ${textStyles.body1.semiBold16};
-    color: ${text[10]};
+    ${({ $status }) => {
+      switch ($status) {
+        case "active":
+          return css`
+            color: ${text[10]};
+          `;
+        case "error":
+          return css`
+            color: ${text[30]};
+          `;
+
+        default:
+          return css`
+            color: ${text[30]};
+          `;
+      }
+    }}
     transition: color 200ms ease-in-out;
 
     &::placeholder {

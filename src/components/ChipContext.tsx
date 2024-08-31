@@ -20,7 +20,7 @@ const Container = styled.div`
   width: fit-content;
   height: fit-content;
   padding: 4px 12px;
-  border-radius: ${`${chip.smallRound}px`};
+  border-radius: ${chip.smallRound};
   ${textStyles.caption.regular12};
   color: ${textColor[20]};
   background-color: ${surfaceColor[20]};

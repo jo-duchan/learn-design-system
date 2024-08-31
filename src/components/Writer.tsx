@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { text } from "@/styles/tokens/alias";
 import textStyles from "@/styles/typography";
+import Level1Badge from "@/assets/img/user-level-1.png";
 import Level2Badge from "@/assets/img/user-level-2.png";
 import AdminBadge from "@/assets/img/user-level-admin.png";
 import Visibility from "@/components/Visibility";
@@ -15,6 +16,7 @@ interface Props {
 
 function Writer({ connected, profile, name, level, loginId }: Props) {
   const setBadge = () => {
+    if (level === "level-1") return Level1Badge;
     if (level === "level-2") return Level2Badge;
     if (level === "admin") return AdminBadge;
   };

@@ -25,7 +25,7 @@ interface BaseProps extends Props {
 interface StyledProps {
   $width: number;
   $height: number;
-  $round: number;
+  $round: string;
   $font: FlattenSimpleInterpolation;
   $labelColor: string;
   $surfaceColor: string;
@@ -216,7 +216,7 @@ const Container = styled.button<StyledProps>`
   height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
-  border-radius: ${({ $round }) => `${$round}px`};
+  border-radius: ${({ $round }) => $round};
   color: ${({ $labelColor }) => $labelColor};
   background-color: ${({ $surfaceColor }) => $surfaceColor};
   ${({ $font }) => $font};
