@@ -162,7 +162,7 @@ const Container = styled.button<StyledProps>`
   height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
-  border-radius: ${`${button.iconRound}px`};
+  border-radius: ${`${button.iconRound}`};
   background-color: ${({ $surfaceColor }) => $surfaceColor};
   transition: 200ms ease-in-out;
   transition-property: background-color;
