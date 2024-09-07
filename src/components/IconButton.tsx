@@ -5,11 +5,11 @@ import { button } from "@/styles/tokens/component-specific";
 export type ButtonStatus = "enabled" | "disabled" | "pressed";
 export type ButtonSize = "small" | "xSmall";
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
   status: ButtonStatus;
   icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-  action: () => void;
+  action?: () => void;
 }
 
 interface BaseProps extends Props {
@@ -39,6 +39,7 @@ function ButtonBase({
   surfacePressedColor,
   iconDisabledColor,
   surfaceDisabledColor,
+  ...props
 }: BaseProps) {
   const [btnStatus, setBtnStatus] = useState<ButtonStatus>(status);
 
@@ -107,13 +108,14 @@ function ButtonBase({
       $iconColor={setColor().icon}
       $surfaceColor={setColor().surface}
       disabled={status === "disabled"}
+      {...props}
     >
       <Icon />
     </Container>
   );
 }
 
-function Primary({ size, status, icon, action }: Props) {
+function Primary({ size, status, icon, action, ...props }: Props) {
   return (
     <ButtonBase
       size={size}
@@ -126,11 +128,12 @@ function Primary({ size, status, icon, action }: Props) {
       surfacePressedColor={button.iconPrimarySurfacePressed}
       iconDisabledColor={button.iconPrimaryIconDisabled}
       surfaceDisabledColor={button.iconPrimarySurfaceDisabled}
+      {...props}
     />
   );
 }
 
-function Ghost({ size, status, icon, action }: Props) {
+function Ghost({ size, status, icon, action, ...props }: Props) {
   return (
     <ButtonBase
       size={size}
@@ -143,6 +146,7 @@ function Ghost({ size, status, icon, action }: Props) {
       surfacePressedColor={button.iconGhostSurfacePressed}
       iconDisabledColor={button.iconGhostIconDisabled}
       surfaceDisabledColor={button.iconGhostSurfaceDisabled}
+      {...props}
     />
   );
 }
