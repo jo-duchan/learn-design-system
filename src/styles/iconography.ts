@@ -3,6 +3,10 @@ import series from "@/assets/icon/icon-series.svg?react";
 import photo from "@/assets/icon/icon-photo.svg?react";
 import arrow from "@/assets/icon/icon-arrow.svg?react";
 import close from "@/assets/icon/icon-close.svg?react";
+import letter from "@/assets/icon/icon-letter.svg?react";
+import heart from "@/assets/icon/icon-heart.svg?react";
+import chatBubble from "@/assets/icon/icon-chat-bubble.svg?react";
+import share from "@/assets/icon/icon-share.svg?react";
 
 const Icons = {
   home,
@@ -10,6 +14,10 @@ const Icons = {
   photo,
   arrow,
   close,
+  letter,
+  heart,
+  chatBubble,
+  share,
 };
 
 export default Icons;
