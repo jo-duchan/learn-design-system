@@ -21,7 +21,7 @@ interface StyledProps {
 }
 
 function SnackBar({
-  isShow,
+  isShow = false,
   fixedPosition,
   fullWidth,
   width = 328,

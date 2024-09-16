@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useArgs } from "@storybook/preview-api";
 import SnackBar from "@/components/SnackBar";
 import GhostButton from "@/components/GhostButton";
 import IconButton from "@/components/IconButton";
 import Icons from "@/styles/iconography";
 import { disableProperty } from "@/utils/storybook-control-util";
+import { useEffect } from "react";
 
 const meta: Meta<typeof SnackBar> = {
   title: "Components/SnackBar",
@@ -35,6 +37,18 @@ export const WithGhostButton: Story = {
       />
     ),
   },
+  render: function Render(args) {
+    const [{ isShow }, updateArgs] = useArgs();
+
+    useEffect(() => {
+      updateArgs({ isShow: true });
+
+      return () => {
+        updateArgs({ isShow: false });
+      };
+    }, []);
+    return <SnackBar {...args} isShow={isShow} />;
+  },
 };
 
 export const WithIconButton: Story = {
@@ -52,5 +66,17 @@ export const WithIconButton: Story = {
         action={() => alert("클릭!!")}
       />
     ),
+  },
+  render: function Render(args) {
+    const [{ isShow }, updateArgs] = useArgs();
+
+    useEffect(() => {
+      updateArgs({ isShow: true });
+
+      return () => {
+        updateArgs({ isShow: false });
+      };
+    }, []);
+    return <SnackBar {...args} isShow={isShow} />;
   },
 };
