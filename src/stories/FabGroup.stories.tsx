@@ -31,6 +31,7 @@ export const Group: Story = {
       <FAB.Group {...args}>
         <FAB.GroupItem
           icon={<Icons.heart />}
+          feedbackIcon={<Icons.heartActive />}
           label={heartNum.toString()}
           action={(bool) => {
             if (!bool) {
@@ -43,7 +44,7 @@ export const Group: Story = {
         />
         <FAB.GroupItem
           icon={<Icons.chatBubble />}
-          label="999"
+          label={chatBubbleNum.toString()}
           action={(bool) => {
             if (!bool) {
               setChatBubbleNum(chatBubbleNum + 1);
@@ -55,7 +56,7 @@ export const Group: Story = {
         />
         <FAB.GroupItem
           icon={<Icons.share />}
-          label={chatBubbleNum.toString()}
+          label={"999"}
           action={handleClick}
         />
         <FAB.GroupItem

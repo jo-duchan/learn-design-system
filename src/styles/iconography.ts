@@ -7,6 +7,7 @@ import letter from "@/assets/icon/icon-letter.svg?react";
 import heart from "@/assets/icon/icon-heart.svg?react";
 import chatBubble from "@/assets/icon/icon-chat-bubble.svg?react";
 import share from "@/assets/icon/icon-share.svg?react";
+import heartActive from "@/assets/icon/icon-heart-active.svg?react";
 
 const Icons = {
   home,
@@ -18,6 +19,7 @@ const Icons = {
   heart,
   chatBubble,
   share,
+  heartActive,
 };
 
 export default Icons;
