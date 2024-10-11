@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { text } from "@/styles/tokens/alias";
 import textStyles from "@/styles/typography";
 import Icons from "@/styles/iconography";
@@ -9,6 +9,8 @@ interface Props {
   fixedPosition: boolean;
   fullWidth: boolean;
   width?: number;
+  currentPath: string;
+  onClick: (path: string) => void;
 }
 
 interface StyledProps {
@@ -16,39 +18,45 @@ interface StyledProps {
   $width: string;
 }
 
+const navItems = [
+  {
+    icon: Icons.home,
+    activeIcon: Icons.homeActive,
+    label: "홈",
+    path: "/home",
+  },
+  {
+    icon: Icons.series,
+    activeIcon: Icons.seriesActive,
+    label: "시리즈",
+    path: "/series",
+  },
+  {
+    icon: Icons.write,
+    activeIcon: Icons.writeActive,
+    label: "글쓰기",
+    path: "/write",
+  },
+  {
+    icon: Icons.ground,
+    activeIcon: Icons.groundActive,
+    label: "그라운드",
+    path: "/ground",
+  },
+  {
+    url: profile.unknown1,
+    label: "프로필",
+    path: "/profile",
+  },
+];
+
 function NavigationBar({
   fixedPosition = false,
-  fullWidth,
-  width = 360,
+  fullWidth = true,
+  width,
+  currentPath,
+  onClick,
 }: Props) {
-  const navItems = [
-    {
-      icon: Icons.home,
-      label: "홈",
-      path: "",
-    },
-    {
-      icon: Icons.series,
-      label: "시리즈",
-      path: "",
-    },
-    {
-      icon: Icons.home,
-      label: "글쓰기",
-      path: "",
-    },
-    {
-      icon: Icons.home,
-      label: "그라운드",
-      path: "",
-    },
-    {
-      url: profile.unknown1,
-      label: "프로필",
-      path: "",
-    },
-  ];
-
   const setWidth = () => {
     if (fullWidth) {
       return "100%";
@@ -67,12 +75,15 @@ function NavigationBar({
       <Divider style="navigation" fullWidth />
       <Navigation>
         {navItems.map((item) => (
-          <Item key={item.label}>
-            <ItemAsset>
-              {item.icon && <item.icon />}
+          <Item key={item.label} onClick={() => onClick(item.path)}>
+            <ItemAsset $active={item.path === currentPath}>
+              {item.icon && <item.icon className="default" />}
+              {item.icon && <item.activeIcon className="active" />}
               {item.url && <img src={item.url} alt="프로필 이미지" />}
             </ItemAsset>
-            <ItemLabel>{item.label}</ItemLabel>
+            <ItemLabel $active={item.path === currentPath}>
+              {item.label}
+            </ItemLabel>
           </Item>
         ))}
       </Navigation>
@@ -90,7 +101,6 @@ const Container = styled.div<StyledProps>`
   flex-direction: column;
   width: ${({ $width }) => $width};
   height: fit-content;
-  /* background-color: salmon; */
 `;
 
 const Navigation = styled.nav`
@@ -113,7 +123,8 @@ const Item = styled.div`
   user-select: none;
 `;
 
-const ItemAsset = styled.div`
+const ItemAsset = styled.div<{ $active: boolean }>`
+  position: relative;
   width: 20px;
   height: 20px;
 
@@ -124,12 +135,37 @@ const ItemAsset = styled.div`
   }
 
   & svg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    transition: opacity 200ms ease-in-out;
+
+    ${({ $active }) =>
+      $active
+        ? css`
+            &.default {
+              opacity: 0;
+            }
+
+            &.active {
+              opacity: 1;
+            }
+          `
+        : css`
+            &.default {
+              opacity: 1;
+            }
+
+            &.active {
+              opacity: 0;
+            }
+          `}
   }
 `;
 
-const ItemLabel = styled.span`
-  color: ${text[10]};
+const ItemLabel = styled.span<{ $active: boolean }>`
+  color: ${({ $active }) => ($active ? text.primary : text[10])};
   ${textStyles.caption.regular12};
 `;

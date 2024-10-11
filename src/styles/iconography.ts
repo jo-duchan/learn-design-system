@@ -1,5 +1,11 @@
-import home from "@/assets/icon/new-home.svg?react";
+import home from "@/assets/icon/icon-home.svg?react";
+import homeActive from "@/assets/icon/icon-home-active.svg?react";
 import series from "@/assets/icon/icon-series.svg?react";
+import seriesActive from "@/assets/icon/icon-series-active.svg?react";
+import write from "@/assets/icon/icon-write.svg?react";
+import writeActive from "@/assets/icon/icon-write-active.svg?react";
+import ground from "@/assets/icon/icon-ground.svg?react";
+import groundActive from "@/assets/icon/icon-ground-active.svg?react";
 import photo from "@/assets/icon/icon-photo.svg?react";
 import arrow from "@/assets/icon/icon-arrow.svg?react";
 import close from "@/assets/icon/icon-close.svg?react";
@@ -12,7 +18,13 @@ import check from "@/assets/icon/icon-check.svg?react";
 
 const Icons = {
   home,
+  homeActive,
   series,
+  seriesActive,
+  write,
+  writeActive,
+  ground,
+  groundActive,
   photo,
   arrow,
   close,
