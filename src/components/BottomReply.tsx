@@ -65,7 +65,7 @@ function BottomReply({
     if (fixedPosition) {
       position = "fixed";
       bottom = "0";
-      left = `calc((${window.innerWidth}px - ${setWidth()}) / 2)`;
+      left = "50%";
     }
     return { position, bottom, left };
   };

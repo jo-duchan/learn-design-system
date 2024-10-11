@@ -38,14 +38,9 @@ function BottomSheetBase<P extends BaseInjectedProps>(
   Component: React.ComponentType<P>,
   type: BottomSheetType
 ): React.FC<Omit<P, keyof BaseInjectedProps> & BaseProps> {
-  return ({
-    isShow = false,
-    fixedPosition = true,
-    fullWidth = true,
-    ...props
-  }) => {
+  return ({ isShow = false, fixedPosition = true, ...props }) => {
     const setWidth = () => {
-      if (fullWidth && props.width === undefined) {
+      if (props.fullWidth) {
         return "100%";
       }
       return `${props.width}px`;
@@ -59,7 +54,7 @@ function BottomSheetBase<P extends BaseInjectedProps>(
       if (fixedPosition) {
         position = "fixed";
         bottom = "32px";
-        left = `calc((${window.innerWidth}px - ${setWidth()}) / 2)`;
+        left = "50%";
       }
       return { position, bottom, left };
     };
@@ -86,17 +81,17 @@ function BottomSheetBase<P extends BaseInjectedProps>(
   };
 }
 
-const Transition = () => css`
+const Transition = (left: string) => css`
   transition: 300ms ease-in-out;
   transition-property: transform, opacity;
-  transform: translate3d(0, 100%, 0);
+  transform: ${`translate3d(-${left}, 100%, 0)`};
 
   &[class*="enter-"] {
-    transform: translate3d(0, 0, 0);
+    transform: ${`translate3d(-${left}, 0, 0)`};
   }
 
   &[class*="exit-"] {
-    transform: translate3d(0, 100%, 0);
+    transform: ${`translate3d(-${left}, 100%, 0)`};
   }
 `;
 
@@ -113,7 +108,7 @@ const BaseContainer = styled.div<BaseStyledProps>`
   border-radius: 20px 20px 0 0;
   box-sizing: border-box;
   background-color: ${surface[20]};
-  ${Transition};
+  ${({ $left }) => Transition($left)};
 `;
 
 const BaseHeader = styled.div`
