@@ -112,6 +112,7 @@ const Container = styled.div<StyledProps>`
 `;
 
 const InputWrapper = styled.label<StyledProps>`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
