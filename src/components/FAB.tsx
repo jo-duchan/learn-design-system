@@ -82,31 +82,27 @@ interface FabItemContainerProps extends FabBaseInjectedProps {
   label: string;
   action: (bool?: boolean) => void;
   feedbackIcon?: React.ReactNode;
-  showFeedback?: boolean;
 }
 
-function FabItemContainer({
-  showFeedback = false,
-  ...props
-}: FabItemContainerProps) {
+function FabItemContainer(props: FabItemContainerProps) {
   const [isActive, setIsActive] = useState<boolean>(false);
   return (
     <ItemContainer
       onClick={() => {
-        showFeedback && setIsActive((prev) => !prev);
+        props.feedbackIcon && setIsActive((prev) => !prev);
         props.action(isActive);
       }}
       $type={props.type}
     >
       <ItemIconWrapper
         $type={props.type}
-        $active={props.feedbackIcon !== undefined && showFeedback && isActive}
+        $active={props.feedbackIcon !== undefined && isActive}
       >
         <div className="default">{props.icon}</div>
         <div className="active">{props.feedbackIcon}</div>
       </ItemIconWrapper>
 
-      <ItemLabel $active={showFeedback && isActive} $type={props.type}>
+      <ItemLabel $active={isActive} $type={props.type}>
         {props.label}
       </ItemLabel>
     </ItemContainer>
@@ -193,8 +189,8 @@ const ItemIconWrapper = styled.div<{ $active: boolean; $type: FabType }>`
         `}
 `;
 
-function Button({ showFeedback = false, ...props }: FabItemContainerProps) {
-  return <FabItemContainer {...props} showFeedback={showFeedback} />;
+function Button(props: FabItemContainerProps) {
+  return <FabItemContainer {...props} />;
 }
 
 interface FabGroupProps extends FabBaseInjectedProps {
@@ -209,13 +205,8 @@ const GroupContainer = styled.div`
   display: flex;
 `;
 
-function GroupItem({
-  showFeedback = false,
-  ...props
-}: Omit<FabItemContainerProps, "type">) {
-  return (
-    <FabItemContainer {...props} showFeedback={showFeedback} type="group" />
-  );
+function GroupItem(props: Omit<FabItemContainerProps, "type">) {
+  return <FabItemContainer {...props} type="group" />;
 }
 
 const FAB = {

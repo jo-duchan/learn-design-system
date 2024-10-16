@@ -11,9 +11,12 @@ import arrow from "@/assets/icon/icon-arrow.svg?react";
 import close from "@/assets/icon/icon-close.svg?react";
 import letter from "@/assets/icon/icon-letter.svg?react";
 import heart from "@/assets/icon/icon-heart.svg?react";
-import chatBubble from "@/assets/icon/icon-chat-bubble.svg?react";
-import share from "@/assets/icon/icon-share.svg?react";
 import heartActive from "@/assets/icon/icon-heart-active.svg?react";
+import chatBubble from "@/assets/icon/icon-chat-bubble.svg?react";
+import chatBubbleActive from "@/assets/icon/icon-chat-bubble-active.svg?react";
+import bookmark from "@/assets/icon/icon-bookmark.svg?react";
+import bookmarkActive from "@/assets/icon/icon-bookmark-active.svg?react";
+import share from "@/assets/icon/icon-share.svg?react";
 import check from "@/assets/icon/icon-check.svg?react";
 
 const Icons = {
@@ -30,9 +33,12 @@ const Icons = {
   close,
   letter,
   heart,
-  chatBubble,
-  share,
   heartActive,
+  chatBubble,
+  chatBubbleActive,
+  bookmark,
+  bookmarkActive,
+  share,
   check,
 };
 

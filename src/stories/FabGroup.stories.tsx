@@ -23,7 +23,7 @@ export const Group: Story = {
   render: function Render(args) {
     const [heartNum, setHeartNum] = useState(900);
     const [chatBubbleNum, setChatBubbleNum] = useState(900);
-    const [shareNum, setShareNum] = useState(900);
+    const [bookmarkNum, setBookmarkNum] = useState(900);
     const handleClick = () => {
       alert("클릭!!");
     };
@@ -40,10 +40,10 @@ export const Group: Story = {
               setHeartNum(heartNum - 1);
             }
           }}
-          showFeedback
         />
         <FAB.GroupItem
           icon={<Icons.chatBubble />}
+          feedbackIcon={<Icons.chatBubbleActive />}
           label={chatBubbleNum.toString()}
           action={(bool) => {
             if (!bool) {
@@ -52,24 +52,23 @@ export const Group: Story = {
               setChatBubbleNum(chatBubbleNum - 1);
             }
           }}
-          showFeedback
+        />
+        <FAB.GroupItem
+          icon={<Icons.bookmark />}
+          feedbackIcon={<Icons.bookmarkActive />}
+          label={bookmarkNum.toString()}
+          action={(bool) => {
+            if (!bool) {
+              setBookmarkNum(bookmarkNum + 1);
+            } else {
+              setBookmarkNum(bookmarkNum - 1);
+            }
+          }}
         />
         <FAB.GroupItem
           icon={<Icons.share />}
           label={"999"}
           action={handleClick}
-        />
-        <FAB.GroupItem
-          icon={<Icons.share />}
-          label={shareNum.toString()}
-          action={(bool) => {
-            if (!bool) {
-              setShareNum(shareNum + 1);
-            } else {
-              setShareNum(shareNum - 1);
-            }
-          }}
-          showFeedback
         />
       </FAB.Group>
     );
