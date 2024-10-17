@@ -8,7 +8,7 @@
 
 [데모 사이트 링크](https://jo-duchan.github.io/learn-design-system/)
 
-### Chapter
+### Design System Blog Series
 
 1.  [실무에서 쓰이는 디자인 시스템 — 디자인 시스템 소개](https://medium.com/@duchanjo/실무에서-쓰이는-디자인-시스템-디자인-시스템-소개-0ad08537cd78)
 2.  [실무에서 쓰이는 디자인 시스템 — 디자인 토큰 Part 1](https://medium.com/@duchanjo/실무에서-쓰이는-디자인-시스템-디자인-토큰-part-1-7f60fe0520e4)
