@@ -8,7 +8,6 @@ const meta: Meta<typeof FAB.Button> = {
   component: FAB.Button,
   argTypes: {
     ...disableProperty("icon"),
-    ...disableProperty("showFeedback"),
     ...disableProperty("fixedPosition"),
   },
 };
@@ -20,7 +19,6 @@ export const Button: Story = {
   args: {
     icon: <Icons.letter />,
     label: "응원 카드 보내기",
-    showFeedback: false,
     fixedPosition: false,
   },
   render: function Render(args) {
