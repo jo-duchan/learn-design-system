@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import styled, { type FlattenSimpleInterpolation } from "styled-components";
+import styled, { css } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
 import textStyles from "@/styles/typography";
 
@@ -8,7 +7,7 @@ export type ButtonStatus = "enabled" | "disabled" | "pressed";
 
 interface Props {
   size: ButtonSize;
-  status: ButtonStatus;
+  disabled?: boolean;
   label: string;
   action: () => void;
 }
@@ -23,17 +22,18 @@ interface BaseProps extends Props {
 }
 
 interface StyledProps {
-  $width: number;
-  $height: number;
-  $round: string;
-  $font: FlattenSimpleInterpolation;
-  $labelColor: string;
-  $surfaceColor: string;
+  $size: ButtonSize;
+  $labelEnabledColor: string;
+  $surfaceEnabledColor: string;
+  $labelPressedColor: string;
+  $surfacePressedColor: string;
+  $labelDisabledColor: string;
+  $surfaceDisabledColor: string;
 }
 
 function ButtonBase({
   size,
-  status,
+  disabled = false,
   label,
   action,
   labelEnabledColor,
@@ -43,99 +43,28 @@ function ButtonBase({
   labelDisabledColor,
   surfaceDisabledColor,
 }: BaseProps) {
-  const [btnStatus, setBtnStatus] = useState<ButtonStatus>(status);
-
-  useEffect(() => {
-    setBtnStatus(status);
-  }, [status]);
-
-  const handleSetStatusPressed = () => {
-    setBtnStatus("pressed");
-  };
-
-  const handleSetStatusEnabled = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (e.currentTarget.disabled) return;
-    setBtnStatus("enabled");
-  };
-
-  const setColor = () => {
-    let label = labelEnabledColor;
-    let surface = surfaceEnabledColor;
-
-    if (btnStatus === "enabled") {
-      label = labelEnabledColor;
-      surface = surfaceEnabledColor;
-    }
-
-    if (btnStatus === "pressed") {
-      label = labelPressedColor;
-      surface = surfacePressedColor;
-    }
-
-    if (btnStatus === "disabled") {
-      label = labelDisabledColor;
-      surface = surfaceDisabledColor;
-    }
-
-    return { label, surface };
-  };
-
-  const setSize = () => {
-    let width = 100;
-    let height = 40;
-    let round = button.mediumRound;
-    let font = textStyles.body1.semiBold16;
-
-    if (size === "large") {
-      width = 148;
-      height = 54;
-      round = button.largeRound;
-      font = textStyles.title2.bold18;
-    }
-
-    if (size === "medium") {
-      width = 100;
-      height = 40;
-      round = button.mediumRound;
-      font = textStyles.body1.semiBold16;
-    }
-
-    if (size === "small") {
-      width = 60;
-      height = 32;
-      round = button.mediumRound;
-      font = textStyles.body2.semiBold14;
-    }
-
-    return { width, height, round, font };
-  };
-
   return (
     <Container
       onClick={action}
-      onMouseDown={handleSetStatusPressed}
-      onMouseUp={handleSetStatusEnabled}
-      onMouseLeave={handleSetStatusEnabled}
-      $width={setSize().width}
-      $height={setSize().height}
-      $round={setSize().round}
-      $font={setSize().font}
-      $labelColor={setColor().label}
-      $surfaceColor={setColor().surface}
-      disabled={status === "disabled"}
+      $labelEnabledColor={labelEnabledColor}
+      $surfaceEnabledColor={surfaceEnabledColor}
+      $labelPressedColor={labelPressedColor}
+      $surfacePressedColor={surfacePressedColor}
+      $labelDisabledColor={labelDisabledColor}
+      $surfaceDisabledColor={surfaceDisabledColor}
+      $size={size}
+      disabled={disabled}
     >
       {label}
     </Container>
   );
 }
 
-function Primary({ size, status, label, action }: Props) {
+function Primary({ size, disabled, label, action }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       label={label}
       action={action}
       labelEnabledColor={button.primaryLabelEnabled}
@@ -148,11 +77,11 @@ function Primary({ size, status, label, action }: Props) {
   );
 }
 
-function PrimaryLow({ size, status, label, action }: Props) {
+function PrimaryLow({ size, disabled, label, action }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       label={label}
       action={action}
       labelEnabledColor={button.primaryLowLabelEnabled}
@@ -165,11 +94,11 @@ function PrimaryLow({ size, status, label, action }: Props) {
   );
 }
 
-function Neutral({ size, status, label, action }: Props) {
+function Neutral({ size, disabled, label, action }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       label={label}
       action={action}
       labelEnabledColor={button.neutralLabelEnabled}
@@ -182,11 +111,11 @@ function Neutral({ size, status, label, action }: Props) {
   );
 }
 
-function Inverse({ size, status, label, action }: Props) {
+function Inverse({ size, disabled, label, action }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       label={label}
       action={action}
       labelEnabledColor={button.inverseLabelEnabled}
@@ -212,14 +141,49 @@ const Container = styled.button<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $width }) => `${$width}px`};
-  height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
-  border-radius: ${({ $round }) => $round};
-  color: ${({ $labelColor }) => $labelColor};
-  background-color: ${({ $surfaceColor }) => $surfaceColor};
-  ${({ $font }) => $font};
+
+  &:enabled {
+    color: ${({ $labelEnabledColor }) => $labelEnabledColor};
+    background-color: ${({ $surfaceEnabledColor }) => $surfaceEnabledColor};
+  }
+
+  &:active {
+    color: ${({ $labelPressedColor }) => $labelPressedColor};
+    background-color: ${({ $surfacePressedColor }) => $surfacePressedColor};
+  }
+
+  &:disabled {
+    color: ${({ $labelDisabledColor }) => $labelDisabledColor};
+    background-color: ${({ $surfaceDisabledColor }) => $surfaceDisabledColor};
+  }
+
+  ${({ $size }) => {
+    switch ($size) {
+      case "small":
+        return css`
+          width: 60px;
+          height: 32px;
+          border-radius: ${button.mediumRound};
+          ${textStyles.body2.semiBold14}
+        `;
+      case "medium":
+        return css`
+          width: 100px;
+          height: 40px;
+          border-radius: ${button.mediumRound};
+          ${textStyles.body1.semiBold16}
+        `;
+      case "large":
+        return css`
+          width: 148px;
+          height: 54px;
+          border-radius: ${button.largeRound};
+          ${textStyles.title2.bold18};
+        `;
+    }
+  }}
 
   transition: 200ms ease-in-out;
   transition-property: color, background-color;
