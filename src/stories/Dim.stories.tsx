@@ -5,20 +5,24 @@ import { demo } from "@/assets/aws-s3-assets";
 
 const Container = styled.div`
   position: absolute;
-  width: 360px;
-  height: 800px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
   & > img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 `;
 
 const meta: Meta<typeof Dim> = {
   title: "Components/Dim",
   component: Dim,
+  parameters: {
+    layout: "fullscreen",
+  },
   decorators: [
     (Story) => (
       <Container>
