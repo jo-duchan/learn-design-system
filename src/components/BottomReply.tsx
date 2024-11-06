@@ -15,13 +15,6 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   width?: number;
 }
 
-interface StyledProps {
-  $position: string;
-  $bottom: string;
-  $left: string;
-  $width: string;
-}
-
 function BottomReply({
   register,
   name,
@@ -50,32 +43,8 @@ function BottomReply({
     onChange(e);
   };
 
-  const setWidth = () => {
-    if (fullWidth) {
-      return "100%";
-    }
-    return `${width}px`;
-  };
-
-  const setPosition = () => {
-    let position = "static";
-    let bottom = "0";
-    let left = "0";
-
-    if (fixedPosition) {
-      position = "fixed";
-      bottom = "0";
-      left = "50%";
-    }
-    return { position, bottom, left };
-  };
   return (
-    <Container
-      $width={setWidth()}
-      $position={setPosition().position}
-      $bottom={setPosition().bottom}
-      $left={setPosition().left}
-    >
+    <Container>
       <Divider fullWidth style="default" />
       <ReplyWrapper>
         <Textarea
@@ -113,11 +82,12 @@ function BottomReply({
 
 export default BottomReply;
 
-const Container = styled.div<StyledProps>`
-  position: ${({ $position }) => $position};
-  left: ${({ $left }) => $left};
-  bottom: ${({ $bottom }) => $bottom};
-  width: ${({ $width }) => $width};
+const Container = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  transform: translate3d(-50%, 0, 0);
 `;
 
 const ReplyWrapper = styled.div`
