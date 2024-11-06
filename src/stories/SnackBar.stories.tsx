@@ -12,8 +12,6 @@ const meta: Meta<typeof SnackBar> = {
   component: SnackBar,
   argTypes: {
     ...disableProperty("button"),
-    ...disableProperty("fixedPosition"),
-    ...disableProperty("fullWidth"),
     ...disableProperty("width"),
   },
 };
@@ -24,13 +22,10 @@ type Story = StoryObj<typeof SnackBar>;
 export const WithGhostButton: Story = {
   args: {
     isShow: false,
-    fixedPosition: false,
-    fullWidth: false,
-    width: 328,
+    width: "361px",
     text: "글을 저장했어요",
     button: (
       <GhostButton.Primary
-        status="enabled"
         size="small"
         label="보기"
         action={() => alert("클릭!!")}
@@ -54,13 +49,10 @@ export const WithGhostButton: Story = {
 export const WithIconButton: Story = {
   args: {
     isShow: false,
-    fixedPosition: false,
-    fullWidth: false,
-    width: 328,
+    width: "361px",
     text: "글을 저장했어요",
     button: (
       <IconButton.Ghost
-        status="enabled"
         size="small"
         icon={Icons.photo}
         action={() => alert("클릭!!")}

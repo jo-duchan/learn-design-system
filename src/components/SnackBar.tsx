@@ -6,56 +6,19 @@ import textStyles from "@/styles/typography";
 
 interface Props {
   isShow: boolean;
-  fixedPosition: boolean;
-  fullWidth: boolean;
-  width?: number;
+  width?: string;
   text: string;
   button?: React.ReactNode;
 }
 
 interface StyledProps {
-  $position: string;
-  $bottom: string;
-  $left: string;
   $width: string;
 }
 
-function SnackBar({
-  isShow = false,
-  fixedPosition,
-  fullWidth,
-  width = 328,
-  text,
-  button,
-}: Props) {
-  const setWidth = () => {
-    if (fullWidth) {
-      return "100%";
-    }
-    return `${width}px`;
-  };
-
-  const setPosition = () => {
-    let position = "static";
-    let bottom = "0";
-    let left = "0";
-
-    if (fixedPosition) {
-      position = "fixed";
-      bottom = "32px";
-      left = `calc((${window.innerWidth}px - ${setWidth()}) / 2)`;
-    }
-    return { position, bottom, left };
-  };
-
+function SnackBar({ isShow = false, width = "100%", text, button }: Props) {
   return (
     <CSSTransition in={isShow} timeout={300} unmountOnExit>
-      <Container
-        $width={setWidth()}
-        $position={setPosition().position}
-        $bottom={setPosition().bottom}
-        $left={setPosition().left}
-      >
+      <Container $width={width}>
         <TextContent>{text}</TextContent>
         {button}
       </Container>
@@ -68,24 +31,24 @@ export default SnackBar;
 const Transition = () => css`
   transition: 300ms ease-in-out;
   transition-property: transform, opacity;
-  transform: translate3d(0, 100%, 0);
+  transform: translate3d(-50%, 100%, 0);
   opacity: 0;
 
   &[class*="enter-"] {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-50%, 0, 0);
     opacity: 1;
   }
 
   &[class*="exit-"] {
-    transform: translate3d(0, 100%, 0);
+    transform: translate3d(-50%, 100%, 0);
     opacity: 0;
   }
 `;
 
 const Container = styled.div<StyledProps>`
-  position: ${({ $position }) => $position};
-  left: ${({ $left }) => $left};
-  bottom: ${({ $bottom }) => $bottom};
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -96,6 +59,7 @@ const Container = styled.div<StyledProps>`
   box-sizing: border-box;
   background-color: ${surface[20]};
   border-radius: ${alertRound};
+  z-index: 900;
 
   ${Transition};
 `;
