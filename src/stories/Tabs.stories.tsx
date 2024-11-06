@@ -7,10 +7,11 @@ const meta: Meta<typeof Tabs> = {
   title: "Components/Tabs",
   component: Tabs,
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
   },
   argTypes: {
     ...disableProperty("onChange"),
+    ...disableProperty("width"),
   },
 };
 
@@ -22,5 +23,6 @@ export const Default: Story = {
     defaultIndex: 0,
     labels: ["Label 1", "Label 2", "Label 3"],
     onChange: fn(),
+    width: "361px",
   },
 };
