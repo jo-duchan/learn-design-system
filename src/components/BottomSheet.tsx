@@ -18,54 +18,20 @@ interface BaseProps {
   title: string;
   isShow: boolean;
   onClose: () => void;
-  fixedPosition?: boolean;
-  fullWidth?: boolean;
-  width?: number;
 }
 
 interface BaseInjectedProps {
   type: BottomSheetType;
 }
 
-interface BaseStyledProps {
-  $position: string;
-  $bottom: string;
-  $left: string;
-  $width: string;
-}
-
 function BottomSheetBase<P extends BaseInjectedProps>(
   Component: React.ComponentType<P>,
   type: BottomSheetType
 ): React.FC<Omit<P, keyof BaseInjectedProps> & BaseProps> {
-  return ({ isShow = false, fixedPosition = true, ...props }) => {
-    const setWidth = () => {
-      if (props.fullWidth) {
-        return "100%";
-      }
-      return `${props.width}px`;
-    };
-
-    const setPosition = () => {
-      let position = "static";
-      let bottom = "0";
-      let left = "0";
-
-      if (fixedPosition) {
-        position = "fixed";
-        bottom = "32px";
-        left = "50%";
-      }
-      return { position, bottom, left };
-    };
+  return ({ isShow = false, ...props }) => {
     return (
       <CSSTransition in={isShow} timeout={300} unmountOnExit>
-        <BaseContainer
-          $width={setWidth()}
-          $position={setPosition().position}
-          $bottom={setPosition().bottom}
-          $left={setPosition().left}
-        >
+        <BaseContainer>
           <BaseHeader>
             <BaseTitle>{props.title}</BaseTitle>
             <CloseButton onClick={props.onClose}>
@@ -81,34 +47,34 @@ function BottomSheetBase<P extends BaseInjectedProps>(
   };
 }
 
-const Transition = (left: string) => css`
+const Transition = css`
   transition: 300ms ease-in-out;
   transition-property: transform, opacity;
-  transform: ${`translate3d(-${left}, 100%, 0)`};
+  transform: ${`translate3d(-50%, 100%, 0)`};
 
   &[class*="enter-"] {
-    transform: ${`translate3d(-${left}, 0, 0)`};
+    transform: ${`translate3d(-50%, 0, 0)`};
   }
 
   &[class*="exit-"] {
-    transform: ${`translate3d(-${left}, 100%, 0)`};
+    transform: ${`translate3d(-50%, 100%, 0)`};
   }
 `;
 
-const BaseContainer = styled.div<BaseStyledProps>`
-  position: ${({ $position }) => $position};
-  left: ${({ $left }) => $left};
-  bottom: ${({ $bottom }) => $bottom};
+const BaseContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: ${({ $width }) => $width};
+  width: 100%;
   padding-block: 24px 0;
   padding-inline: 24px;
   border-radius: 20px 20px 0 0;
   box-sizing: border-box;
   background-color: ${surface[20]};
-  ${({ $left }) => Transition($left)};
+  ${Transition};
 `;
 
 const BaseHeader = styled.div`
