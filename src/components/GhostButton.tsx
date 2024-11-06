@@ -1,12 +1,11 @@
-import styled, { FlattenSimpleInterpolation } from "styled-components";
+import styled, { css } from "styled-components";
 import { text as textColors } from "@/styles/tokens/alias";
 import textStyles from "@/styles/typography";
 
-export type ButtonStatus = "enabled" | "disabled" | "pressed";
 export type ButtonSize = "medium" | "small";
 
 interface Props {
-  status: ButtonStatus;
+  disabled?: boolean;
   size: ButtonSize;
   label: string;
   action: () => void;
@@ -20,15 +19,15 @@ interface BaseProps extends Props {
 }
 
 interface StyledProps {
-  $width: number;
-  $height: number;
-  $font: FlattenSimpleInterpolation;
-  $labelColor: string;
-  $surfaceColor: string;
+  $size: ButtonSize;
+  $labelEnabledColor: string;
+  $surfaceEnabledColor: string;
+  $labelDisabledColor: string;
+  $surfaceDisabledColor: string;
 }
 
 function ButtonBase({
-  status,
+  disabled = false,
   size,
   label,
   action,
@@ -37,62 +36,25 @@ function ButtonBase({
   labelDisabledColor,
   surfaceDisabledColor,
 }: BaseProps) {
-  const setColor = () => {
-    let label = labelEnabledColor;
-    let surface = surfaceEnabledColor;
-
-    if (status === "enabled") {
-      label = labelEnabledColor;
-      surface = surfaceEnabledColor;
-    }
-
-    if (status === "disabled") {
-      label = labelDisabledColor;
-      surface = surfaceDisabledColor;
-    }
-
-    return { label, surface };
-  };
-
-  const setSize = () => {
-    let width = 60;
-    let height = 32;
-    let font = textStyles.body1.semiBold16;
-
-    if (size === "medium") {
-      width = 60;
-      height = 32;
-      font = textStyles.body1.semiBold16;
-    }
-
-    if (size === "small") {
-      width = 50;
-      height = 32;
-      font = textStyles.body2.semiBold14;
-    }
-
-    return { width, height, font };
-  };
-
   return (
     <Container
       onClick={action}
-      disabled={status === "disabled"}
-      $labelColor={setColor().label}
-      $surfaceColor={setColor().surface}
-      $font={setSize().font}
-      $width={setSize().width}
-      $height={setSize().height}
+      disabled={disabled}
+      $labelEnabledColor={labelEnabledColor}
+      $surfaceEnabledColor={surfaceEnabledColor}
+      $labelDisabledColor={labelDisabledColor}
+      $surfaceDisabledColor={surfaceDisabledColor}
+      $size={size}
     >
       {label}
     </Container>
   );
 }
 
-function Primary({ label, action, status, size }: Props) {
+function Primary({ label, action, disabled, size }: Props) {
   return (
     <ButtonBase
-      status={status}
+      disabled={disabled}
       size={size}
       label={label}
       action={action}
@@ -104,10 +66,10 @@ function Primary({ label, action, status, size }: Props) {
   );
 }
 
-function Neutral({ label, action, status, size }: Props) {
+function Neutral({ label, action, disabled, size }: Props) {
   return (
     <ButtonBase
-      status={status}
+      disabled={disabled}
       size={size}
       label={label}
       action={action}
@@ -130,20 +92,39 @@ const Container = styled.button<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $width }) => `${$width}px`};
-  height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
-  color: ${({ $labelColor }) => $labelColor};
-  background-color: ${({ $surfaceColor }) => $surfaceColor};
-  ${({ $font }) => $font};
+
+  &:enabled {
+    color: ${({ $labelEnabledColor }) => $labelEnabledColor};
+    background-color: ${({ $surfaceEnabledColor }) => $surfaceEnabledColor};
+  }
+
+  &:disabled {
+    color: ${({ $labelDisabledColor }) => $labelDisabledColor};
+    background-color: ${({ $surfaceDisabledColor }) => $surfaceDisabledColor};
+    cursor: not-allowed;
+  }
+
+  ${({ $size }) => {
+    switch ($size) {
+      case "small":
+        return css`
+          width: 50px;
+          height: 32px;
+          ${textStyles.body2.semiBold14};
+        `;
+      case "medium":
+        return css`
+          width: 60px;
+          height: 32px;
+          ${textStyles.body1.semiBold16};
+        `;
+    }
+  }}
 
   transition: 200ms ease-in-out;
   transition-property: color, background-color;
   cursor: pointer;
   user-select: none;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 `;
