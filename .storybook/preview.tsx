@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { dark, light } from "../src/styles/theme";
 import GlobalStyle from "../src/styles/common";
 import { surface } from "../src/styles/tokens/alias";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 const preview: Preview = {
   parameters: {
@@ -30,6 +31,10 @@ const preview: Preview = {
       storySort: {
         order: ["Components", "*", "GhostButton", ["Primary", "Neutral"]],
       },
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: "iphone14pro",
     },
   },
   decorators: [
