@@ -9,7 +9,7 @@ const meta: Meta<typeof FAB.Button> = {
   component: FAB.Button,
   argTypes: {
     ...disableProperty("icon"),
-    ...disableProperty("fixedPosition"),
+    ...disableProperty("action"),
   },
 };
 

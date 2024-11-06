@@ -1,12 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
 import Chip from "@/components/Chip";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 const meta: Meta<typeof Chip> = {
   title: "Components/ChipSeries",
   component: Chip,
   parameters: {
     layout: "centered",
+  },
+  argTypes: {
+    ...disableProperty("action"),
   },
 };
 

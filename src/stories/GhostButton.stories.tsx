@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import GhostButton from "@/components/GhostButton";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 type MetaType = typeof GhostButton.Primary | typeof GhostButton.Neutral;
 
@@ -14,6 +15,7 @@ const meta: Meta<MetaType> = {
       options: ["medium", "small"],
       control: { type: "radio" },
     },
+    ...disableProperty("action"),
   },
 };
 

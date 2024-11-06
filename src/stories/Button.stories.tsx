@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import Button from "@/components/Button";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 type MetaType =
   | typeof Button.Primary
@@ -18,6 +19,7 @@ const meta: Meta<MetaType> = {
       options: ["large", "medium", "small"],
       control: { type: "radio" },
     },
+    ...disableProperty("action"),
   },
 };
 
