@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
 import styled from "styled-components";
 import BottomSheet from "@/components/BottomSheet";
-import { disableProperty } from "@/utils/storybook-control-util";
 
 const defaultData = [
   {
@@ -28,10 +27,6 @@ const StoryLayout = styled.div`
 const meta: Meta<typeof BottomSheet.Default> = {
   title: "Components/BottomSheet",
   component: BottomSheet.Default,
-  argTypes: {
-    ...disableProperty("width"),
-    ...disableProperty("fixedPosition"),
-  },
 };
 
 export default meta;
@@ -39,8 +34,6 @@ type Story = StoryObj<typeof BottomSheet.Default>;
 
 export const Default: Story = {
   args: {
-    fixedPosition: false,
-    width: 320,
     isShow: false,
     title: "새 글 쓰기",
     list: defaultData,
