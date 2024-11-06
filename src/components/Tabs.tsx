@@ -7,17 +7,15 @@ interface Props {
   defaultIndex?: number;
   labels: string[];
   onChange: (index: number) => void;
-  width?: number;
 }
 
 interface StyledProps {
-  $width?: string;
   $length?: number;
   $selected?: boolean;
   $selectedIndex?: number;
 }
 
-function Tabs({ defaultIndex, labels, onChange, width }: Props) {
+function Tabs({ defaultIndex, labels, onChange }: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number>(defaultIndex ?? 0);
 
   useEffect(() => {
@@ -28,15 +26,8 @@ function Tabs({ defaultIndex, labels, onChange, width }: Props) {
     setSelectedIndex(index);
   };
 
-  const setSize = () => {
-    if (width) {
-      return `${width}px`;
-    }
-    return "100%";
-  };
-
   return (
-    <Container $width={setSize()}>
+    <Container>
       {labels.map((label, index) => (
         <Item
           key={label}
@@ -54,11 +45,11 @@ function Tabs({ defaultIndex, labels, onChange, width }: Props) {
 
 export default Tabs;
 
-const Container = styled.div<StyledProps>`
+const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: ${({ $width }) => $width};
+  width: 100%;
   height: 44px;
 `;
 
