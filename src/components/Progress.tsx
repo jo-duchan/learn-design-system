@@ -3,29 +3,16 @@ import { surface } from "@/styles/tokens/alias";
 
 interface Props {
   present: number;
-  width?: number;
   top?: number;
-  left?: number;
 }
 
 interface StyledProps {
-  $width: string;
   $top: number;
-  $left: number;
   $present: number;
 }
 
-function Progress({ present, width, top = 0, left = 0 }: Props) {
-  const setSize = () => {
-    if (width) {
-      return `${width}px`;
-    }
-    return "100%";
-  };
-
-  return (
-    <Container $width={setSize()} $top={top} $left={left} $present={present} />
-  );
+function Progress({ present, top = 0 }: Props) {
+  return <Container $top={top} $present={present} />;
 }
 
 export default Progress;
@@ -33,11 +20,12 @@ export default Progress;
 const Container = styled.div<StyledProps>`
   position: fixed;
   top: ${({ $top }) => `${$top}px`};
-  left: ${({ $left }) => `${$left}px`};
-  width: ${({ $width }) => $width};
+  left: 0;
+  width: 100%;
   height: 4px;
   background-color: ${surface[25]};
   overflow: hidden;
+  z-index: 900;
 
   &::after {
     content: "";

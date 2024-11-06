@@ -10,4 +10,6 @@ export const profile = {
 export const demo = {
   screen1:
     "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com/demo-screen.png",
+  appBar:
+    "https://mock-design-system-1.s3.ap-northeast-2.amazonaws.com/demo-appbar.png",
 };

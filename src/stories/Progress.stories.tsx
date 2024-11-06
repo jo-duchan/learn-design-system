@@ -4,27 +4,45 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Progress from "@/components/Progress";
 import { surface } from "@/styles/tokens/alias";
 import { disableProperty } from "@/utils/storybook-control-util";
+import { demo } from "@/assets/aws-s3-assets";
+
+const Container = styled.div`
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+`;
 
 const ScrollContainer = styled.div`
-  width: 360px;
-  height: 500px;
+  position: relative;
+  width: 100%;
+  height: calc(100% - 110px);
+  margin-top: 110px;
   overflow: scroll;
 `;
 
 const ScrollContent = styled.div`
   width: 100%;
   height: 500vh;
-  background-color: ${surface[30]};
+  background-color: ${surface[10]};
+`;
+
+const AppBar = styled.img`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
 `;
 
 const meta: Meta<typeof Progress> = {
   title: "Components/Progress",
   component: Progress,
+  parameters: {
+    layout: "fullscreen",
+  },
   argTypes: {
     ...disableProperty("present"),
-    ...disableProperty("width"),
     ...disableProperty("top"),
-    ...disableProperty("left"),
   },
 };
 
@@ -33,7 +51,7 @@ type Story = StoryObj<typeof Progress>;
 
 export const Default: Story = {
   args: {
-    width: 360,
+    top: 0,
   },
   render: function Render(args) {
     const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -58,11 +76,13 @@ export const Default: Story = {
     }, []);
 
     return (
-      <ScrollContainer ref={scrollRef}>
-        <ScrollContent>
-          <Progress {...args} top={16} left={16} present={present} />
-        </ScrollContent>
-      </ScrollContainer>
+      <Container>
+        <AppBar src={demo.appBar} />
+        <Progress {...args} present={present} top={110} />
+        <ScrollContainer ref={scrollRef}>
+          <ScrollContent></ScrollContent>
+        </ScrollContainer>
+      </Container>
     );
   },
 };
