@@ -4,6 +4,9 @@ import ChipContext from "@/components/ChipContext";
 const meta: Meta<typeof ChipContext> = {
   title: "Components/ChipSeries",
   component: ChipContext,
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;

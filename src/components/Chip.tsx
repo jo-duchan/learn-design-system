@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   text as textColor,
   surface as surfaceColor,
@@ -13,33 +13,12 @@ interface Props {
 }
 
 interface StyledProps {
-  $color: string;
-  $bgColor: string;
+  $focused: boolean;
 }
 
 function Chip({ label, focused, action }: Props) {
-  const setColor = () => {
-    let label = textColor[20];
-    let surface = surfaceColor[20];
-
-    if (focused) {
-      label = textColor[50];
-      surface = surfaceColor[50];
-    }
-
-    if (!focused) {
-      label = textColor[20];
-      surface = surfaceColor[20];
-    }
-
-    return { label, surface };
-  };
   return (
-    <Container
-      onClick={action}
-      $color={setColor().label}
-      $bgColor={setColor().surface}
-    >
+    <Container onClick={action} $focused={focused}>
       {label}
     </Container>
   );
@@ -53,10 +32,19 @@ const Container = styled.div<StyledProps>`
   padding: 8px 16px;
   border-radius: ${chip.largeRound};
   ${textStyles.body2.semiBold14};
-  color: ${({ $color }) => $color};
-  background-color: ${({ $bgColor }) => $bgColor};
   cursor: pointer;
   user-select: none;
+
+  ${({ $focused }) =>
+    $focused
+      ? css`
+          color: ${textColor[50]};
+          background-color: ${surfaceColor[50]};
+        `
+      : css`
+          color: ${textColor[20]};
+          background-color: ${surfaceColor[20]};
+        `}
 
   transition: 200ms ease-in-out;
   transition-property: color, background-color;

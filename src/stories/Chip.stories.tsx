@@ -5,6 +5,9 @@ import Chip from "@/components/Chip";
 const meta: Meta<typeof Chip> = {
   title: "Components/ChipSeries",
   component: Chip,
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;
