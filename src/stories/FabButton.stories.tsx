@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import FAB from "@/components/FAB";
 import Icons from "@/styles/iconography";
 import { disableProperty } from "@/utils/storybook-control-util";
@@ -19,12 +20,9 @@ export const Button: Story = {
   args: {
     icon: <Icons.letter />,
     label: "응원 카드 보내기",
-    fixedPosition: false,
+    action: fn(),
   },
   render: function Render(args) {
-    const handleClick = () => {
-      alert("클릭!!");
-    };
-    return <FAB.Button {...args} action={handleClick} />;
+    return <FAB.Button {...args} />;
   },
 };

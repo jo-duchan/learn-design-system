@@ -9,7 +9,6 @@ const meta: Meta<typeof FAB.Group> = {
   component: FAB.Group,
   argTypes: {
     ...disableProperty("children"),
-    ...disableProperty("fixedPosition"),
   },
 };
 
@@ -17,9 +16,7 @@ export default meta;
 type Story = StoryObj<typeof FAB.Group>;
 
 export const Group: Story = {
-  args: {
-    fixedPosition: false,
-  },
+  args: {},
   render: function Render(args) {
     const [heartNum, setHeartNum] = useState(900);
     const [chatBubbleNum, setChatBubbleNum] = useState(900);

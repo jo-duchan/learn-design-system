@@ -15,40 +15,15 @@ interface FabBaseInjectedProps {
 
 interface FabBaseStyledProps {
   $type: FabType;
-  $position: string;
-  $bottom: string;
-  $left: string;
-  $transform: string;
 }
 
 function FabBase<P extends FabBaseInjectedProps>(
   Component: React.ComponentType<P>,
   type: FabType
 ): React.FC<Omit<P, keyof FabBaseInjectedProps> & BaseProps> {
-  return ({ fixedPosition = true, ...props }) => {
-    const setPosition = () => {
-      let position = "static";
-      let bottom = "0";
-      let left = "0";
-      let transform = "initial";
-
-      if (fixedPosition) {
-        position = "fixed";
-        bottom = "32px";
-        left = "50%";
-        transform = "translate3d(-50%, 0, 0)";
-      }
-      return { position, bottom, left, transform };
-    };
-
+  return (props) => {
     return (
-      <FabContainer
-        $type={type}
-        $position={setPosition().position}
-        $bottom={setPosition().bottom}
-        $left={setPosition().left}
-        $transform={setPosition().transform}
-      >
+      <FabContainer $type={type}>
         <Component {...(props as unknown as P)} type={type} />
       </FabContainer>
     );
@@ -56,10 +31,8 @@ function FabBase<P extends FabBaseInjectedProps>(
 }
 
 const FabContainer = styled.div<FabBaseStyledProps>`
-  position: ${({ $position }) => $position};
-  left: ${({ $left }) => $left};
-  bottom: ${({ $bottom }) => $bottom};
-  transform: ${({ $transform }) => $transform};
+  position: fixed;
+  bottom: 32px;
   display: flex;
   align-items: center;
   width: fit-content;
@@ -67,9 +40,15 @@ const FabContainer = styled.div<FabBaseStyledProps>`
   ${({ $type }) =>
     $type === "button"
       ? css`
+          left: initial;
+          right: 16px;
+          transform: translate3d(0, 0, 0);
           padding: 12px 14px;
         `
       : css`
+          left: 50%;
+          right: initial;
+          transform: translate3d(-50%, 0, 0);
           padding: 8px 16px;
         `}
   background-color: ${surface[20]};
