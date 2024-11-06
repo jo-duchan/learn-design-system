@@ -5,6 +5,9 @@ import { profile } from "@/assets/aws-s3-assets";
 const meta: Meta<typeof Writer> = {
   title: "Components/Writer",
   component: Writer,
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;
