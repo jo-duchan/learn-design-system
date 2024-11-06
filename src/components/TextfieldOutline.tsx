@@ -13,8 +13,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   status?: TextfieldStatus;
-  fullWidth: boolean;
-  width?: number;
+  width?: string;
 }
 
 interface StyledProps {
@@ -30,8 +29,7 @@ function TextfieldOutline({
   name,
   label,
   status = "normal",
-  fullWidth,
-  width = 328,
+  width = "100%",
 }: Props) {
   const [textfieldStatus, setTextfieldStatus] =
     useState<TextfieldStatus>("normal");
@@ -40,14 +38,6 @@ function TextfieldOutline({
   useEffect(() => {
     setTextfieldStatus(status);
   }, [status]);
-
-  const setWidth = () => {
-    if (fullWidth) {
-      return "100%";
-    }
-
-    return `${width}px`;
-  };
 
   const handleFocus = () => {
     prevStatus.current = textfieldStatus;
@@ -64,7 +54,7 @@ function TextfieldOutline({
     setValue(name, "");
   };
   return (
-    <Container $status={textfieldStatus} $width={setWidth()}>
+    <Container $status={textfieldStatus} $width={width}>
       <InputWrapper $status={textfieldStatus}>
         <Label $status={textfieldStatus}>{label}</Label>
         <input

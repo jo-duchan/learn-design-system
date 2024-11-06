@@ -10,8 +10,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   register: UseFormRegister<FieldValues>;
   name: string;
   status?: TextfieldStatus;
-  fullWidth: boolean;
-  width?: number;
+  width?: string;
 }
 
 interface StyledProps {
@@ -25,8 +24,7 @@ function TextfieldFill({
   placeholder,
   name,
   status = "normal",
-  fullWidth,
-  width = 328,
+  width = "100%",
 }: Props) {
   const [textfieldStatus, setTextfieldStatus] =
     useState<TextfieldStatus>("normal");
@@ -35,14 +33,6 @@ function TextfieldFill({
   useEffect(() => {
     setTextfieldStatus(status);
   }, [status]);
-
-  const setWidth = () => {
-    if (fullWidth) {
-      return "100%";
-    }
-
-    return `${width}px`;
-  };
 
   const handleFocus = () => {
     prevStatus.current = textfieldStatus;
@@ -56,7 +46,7 @@ function TextfieldFill({
   };
 
   return (
-    <Container $status={textfieldStatus} $width={setWidth()}>
+    <Container $status={textfieldStatus} $width={width}>
       <input
         type="text"
         {...register(name, { required })}

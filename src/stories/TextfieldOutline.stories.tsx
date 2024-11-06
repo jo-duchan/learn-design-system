@@ -6,6 +6,9 @@ import { disableProperty } from "@/utils/storybook-control-util";
 const meta: Meta<typeof TextfieldOutline> = {
   title: "Components/Textfield",
   component: TextfieldOutline,
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;
@@ -16,13 +19,13 @@ export const Outline: Story = {
     ...disableProperty("register"),
     ...disableProperty("setValue"),
     ...disableProperty("name"),
-    ...disableProperty("fullWidth"),
     ...disableProperty("width"),
   },
   args: {
     label: "Assistant Label",
     placeholder: "입력",
     status: "normal",
+    width: "361px",
   },
   render: function Render(args) {
     const { register, setValue, handleSubmit } = useForm<FieldValues>();
