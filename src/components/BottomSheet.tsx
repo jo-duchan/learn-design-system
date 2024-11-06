@@ -24,7 +24,7 @@ interface BaseInjectedProps {
   type: BottomSheetType;
 }
 
-function BottomSheetBase<P extends BaseInjectedProps>(
+function BottomSheetContainer<P extends BaseInjectedProps>(
   Component: React.ComponentType<P>,
   type: BottomSheetType
 ): React.FC<Omit<P, keyof BaseInjectedProps> & BaseProps> {
@@ -266,8 +266,8 @@ function Option(props: OptionProps) {
 const OptionContainer = styled.form``;
 
 const BottomSheet = {
-  Default: BottomSheetBase(Default, "default"),
-  Option: BottomSheetBase(Option, "option"),
+  Default: BottomSheetContainer(Default, "default"),
+  Option: BottomSheetContainer(Option, "option"),
 };
 
 export default BottomSheet;
