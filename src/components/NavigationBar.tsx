@@ -6,16 +6,8 @@ import { profile } from "@/assets/aws-s3-assets";
 import Divider from "@/components/Divider";
 
 interface Props {
-  fixedPosition: boolean;
-  fullWidth: boolean;
-  width?: number;
   currentPath: string;
   onClick: (path: string) => void;
-}
-
-interface StyledProps {
-  $position: string;
-  $width: string;
 }
 
 const navItems = [
@@ -50,29 +42,10 @@ const navItems = [
   },
 ];
 
-function NavigationBar({
-  fixedPosition = false,
-  fullWidth = true,
-  width,
-  currentPath,
-  onClick,
-}: Props) {
-  const setWidth = () => {
-    if (fullWidth) {
-      return "100%";
-    }
-    return `${width}px`;
-  };
-
-  const setPosition = () => {
-    if (fixedPosition) {
-      return "fixed";
-    }
-    return "static";
-  };
+function NavigationBar({ currentPath, onClick }: Props) {
   return (
-    <Container $position={setPosition()} $width={setWidth()}>
-      <Divider style="navigation" fullWidth />
+    <Container>
+      <Divider style="navigation" />
       <Navigation>
         {navItems.map((item) => (
           <Item key={item.label} onClick={() => onClick(item.path)}>
@@ -93,13 +66,13 @@ function NavigationBar({
 
 export default NavigationBar;
 
-const Container = styled.div<StyledProps>`
-  position: ${({ $position }) => $position};
+const Container = styled.div`
+  position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 32px;
   display: flex;
   flex-direction: column;
-  width: ${({ $width }) => $width};
+  width: 100%;
   height: fit-content;
 `;
 
@@ -140,7 +113,7 @@ const ItemAsset = styled.div<{ $active: boolean }>`
     left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity 200ms ease-in-out;
+    transition: opacity 150ms ease-in-out;
 
     ${({ $active }) =>
       $active
@@ -168,4 +141,5 @@ const ItemAsset = styled.div<{ $active: boolean }>`
 const ItemLabel = styled.span<{ $active: boolean }>`
   color: ${({ $active }) => ($active ? text.primary : text[10])};
   ${textStyles.caption.regular12};
+  transition: color 150ms ease-in-out;
 `;
