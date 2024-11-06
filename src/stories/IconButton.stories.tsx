@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import IconButton from "@/components/IconButton";
 import Icons from "@/styles/iconography";
+import { disableProperty } from "@/utils/storybook-control-util";
 
 const meta: Meta<typeof IconButton.Primary | typeof IconButton.Ghost> = {
   title: "Components/IconButton",
+  parameters: {
+    layout: "centered",
+  },
   argTypes: {
     size: {
       options: ["small", "xSmall"],
-      control: { type: "radio" },
-    },
-    status: {
-      options: ["enabled", "pressed", "disabled"],
       control: { type: "radio" },
     },
     icon: {
@@ -21,6 +22,7 @@ const meta: Meta<typeof IconButton.Primary | typeof IconButton.Ghost> = {
       },
       control: { type: "radio" },
     },
+    ...disableProperty("action"),
   },
 };
 
@@ -28,12 +30,11 @@ export default meta;
 type Story = StoryObj<typeof IconButton.Primary | typeof IconButton.Ghost>;
 
 export const Primary: Story = {
-  argTypes: {},
   args: {
     size: "small",
-    status: "enabled",
+    disabled: false,
     icon: Icons.arrow,
-    action: () => {},
+    action: fn(),
   },
   render: function Render(args) {
     return <IconButton.Primary {...args} />;
@@ -43,9 +44,9 @@ export const Primary: Story = {
 export const Ghost: Story = {
   args: {
     size: "small",
-    status: "enabled",
+    disabled: false,
     icon: Icons.photo,
-    action: () => {},
+    action: fn(),
   },
   render: function Render(args) {
     return <IconButton.Ghost {...args} />;

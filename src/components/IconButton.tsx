@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { button } from "@/styles/tokens/component-specific";
 
-export type ButtonStatus = "enabled" | "disabled" | "pressed";
 export type ButtonSize = "small" | "xSmall";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
-  status: ButtonStatus;
+  disabled?: boolean;
   icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   action?: () => void;
 }
@@ -22,15 +20,18 @@ interface BaseProps extends Props {
 }
 
 interface StyledProps {
-  $width: number;
-  $height: number;
-  $iconColor: string;
-  $surfaceColor: string;
+  $size: ButtonSize;
+  $iconEnabledColor: string;
+  $surfaceEnabledColor: string;
+  $iconPressedColor: string;
+  $surfacePressedColor: string;
+  $iconDisabledColor: string;
+  $surfaceDisabledColor: string;
 }
 
 function ButtonBase({
   size,
-  status,
+  disabled = false,
   icon: Icon,
   action,
   iconEnabledColor,
@@ -41,73 +42,17 @@ function ButtonBase({
   surfaceDisabledColor,
   ...props
 }: BaseProps) {
-  const [btnStatus, setBtnStatus] = useState<ButtonStatus>(status);
-
-  useEffect(() => {
-    setBtnStatus(status);
-  }, [status]);
-
-  const handleSetStatusPressed = () => {
-    setBtnStatus("pressed");
-  };
-
-  const handleSetStatusEnabled = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (e.currentTarget.disabled) return;
-    setBtnStatus("enabled");
-  };
-
-  const setColor = () => {
-    let icon = iconEnabledColor;
-    let surface = surfaceEnabledColor;
-
-    if (btnStatus === "enabled") {
-      icon = iconEnabledColor;
-      surface = surfaceEnabledColor;
-    }
-
-    if (btnStatus === "pressed") {
-      icon = iconPressedColor;
-      surface = surfacePressedColor;
-    }
-
-    if (btnStatus === "disabled") {
-      icon = iconDisabledColor;
-      surface = surfaceDisabledColor;
-    }
-
-    return { icon, surface };
-  };
-
-  const setSize = () => {
-    let width = 32;
-    let height = 32;
-
-    if (size === "small") {
-      width = 32;
-      height = 32;
-    }
-
-    if (size === "xSmall") {
-      width = 24;
-      height = 24;
-    }
-
-    return { width, height };
-  };
-
   return (
     <Container
       onClick={action}
-      onMouseDown={handleSetStatusPressed}
-      onMouseUp={handleSetStatusEnabled}
-      onMouseLeave={handleSetStatusEnabled}
-      $width={setSize().width}
-      $height={setSize().height}
-      $iconColor={setColor().icon}
-      $surfaceColor={setColor().surface}
-      disabled={status === "disabled"}
+      $size={size}
+      $iconEnabledColor={iconEnabledColor}
+      $surfaceEnabledColor={surfaceEnabledColor}
+      $iconPressedColor={iconPressedColor}
+      $surfacePressedColor={surfacePressedColor}
+      $iconDisabledColor={iconDisabledColor}
+      $surfaceDisabledColor={surfaceDisabledColor}
+      disabled={disabled}
       {...props}
     >
       <Icon />
@@ -115,11 +60,11 @@ function ButtonBase({
   );
 }
 
-function Primary({ size, status, icon, action, ...props }: Props) {
+function Primary({ size, disabled, icon, action, ...props }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       icon={icon}
       action={action}
       iconEnabledColor={button.iconPrimaryIconEnabled}
@@ -133,11 +78,11 @@ function Primary({ size, status, icon, action, ...props }: Props) {
   );
 }
 
-function Ghost({ size, status, icon, action, ...props }: Props) {
+function Ghost({ size, disabled, icon, action, ...props }: Props) {
   return (
     <ButtonBase
       size={size}
-      status={status}
+      disabled={disabled}
       icon={icon}
       action={action}
       iconEnabledColor={button.iconGhostIconEnabled}
@@ -162,24 +107,54 @@ const Container = styled.button<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $width }) => `${$width}px`};
-  height: ${({ $height }) => `${$height}px`};
   border: initial;
   padding: initial;
   border-radius: ${`${button.iconRound}`};
-  background-color: ${({ $surfaceColor }) => $surfaceColor};
+
   transition: 200ms ease-in-out;
   transition-property: background-color;
   cursor: pointer;
   user-select: none;
 
-  &:disabled {
-    cursor: not-allowed;
-  }
-
   & svg path {
-    fill: ${({ $iconColor }) => $iconColor};
     transition: 200ms ease-in-out;
     transition-property: fill;
+  }
+
+  ${({ $size }) => {
+    switch ($size) {
+      case "xSmall":
+        return css`
+          width: 24px;
+          height: 24px;
+        `;
+      case "small":
+        return css`
+          width: 32px;
+          height: 32px;
+        `;
+    }
+  }}
+
+  &:enabled {
+    svg path {
+      fill: ${({ $iconEnabledColor }) => $iconEnabledColor};
+    }
+    background-color: ${({ $surfaceEnabledColor }) => $surfaceEnabledColor};
+  }
+
+  &:active {
+    svg path {
+      fill: ${({ $iconPressedColor }) => $iconPressedColor};
+    }
+    background-color: ${({ $surfacePressedColor }) => $surfacePressedColor};
+  }
+
+  &:disabled {
+    svg path {
+      fill: ${({ $iconDisabledColor }) => $iconDisabledColor};
+    }
+    background-color: ${({ $surfaceDisabledColor }) => $surfaceDisabledColor};
+    cursor: not-allowed;
   }
 `;
